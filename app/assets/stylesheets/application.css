@@ -1,0 +1,130 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+a{
+	color: #aaa;
+	text-decoration: none;
+}
+
+
+a:hover{
+	color: #000;
+}
+#wrapper{
+	width: 700px;
+	margin: 0px auto;
+}
+
+
+#header{
+	font-size: 150%;
+	font-weight: bold;
+	margin: 10px;
+	padding: 5px;
+	width: 100%;
+	border-bottom: 1px solid #aaa;
+}
+
+#navigation{
+	font-size: 80%;
+/*	position: relative;*/
+/*	right: 10px;*/
+/*	top: 5px;*/
+	margin-top: 0;
+	float: right;
+	display: inline-block;
+}
+
+#navigation li{
+	display: inline-block;
+	list-style: none;
+	padding: 3px;
+	margin: 5px;
+}
+
+#header-title{
+	font-size: 200%;
+}
+
+#content{
+	margin: 10px;
+	padding: 10px;	
+}
+
+#footer{
+	text-align: right;
+}
+
+#new-deck{
+	margin: 10px;
+	width: 100%;
+	text-align: right;
+}
+
+
+#decks{
+	margin: 20px;
+}
+
+.deck{
+	display: inline-block;
+	border: 2px solid #ccc;
+	padding: 5px;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+.deck-edit{
+	font-size: 80%;
+}
+
+.deck-title{
+	font-weight: bold;
+}
+
+#deck-flashcards{
+	margin:20px;
+}
+
+.deck-flashcard{
+	margin:10px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	padding: 0px;
+}
+
+.deck-flashcard-a{
+	text-align: center;
+	color: white;
+	padding: 10px;
+	background: #aaa;
+}
+
+.deck-flashcard-b{
+	text-align: center;
+	color: white;
+	padding: 10px;	
+	background: #555;
+}
+
+.deck-flashcard-new{
+	text-align: center;
+	color: white;
+	padding: 10px;	
+	background: #fc0;
+}
+
+
+#deck-edit{
+	margin: 5px;
+}
+
+#deck-edit a{
+	display: inline-block;
+	margin: 5px;
+}

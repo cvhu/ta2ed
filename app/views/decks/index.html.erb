@@ -1,0 +1,12 @@
+<% content_for :header_title do%>
+	Decks
+<% end %>
+
+
+<div id="decks">
+	<% @decks.each do |deck| %>
+		<div class="deck">
+		    <div class="deck-title"><%=link_to deck.title, deck_path(deck) %></div>
+		</div>				
+	<% end %>
+</div>

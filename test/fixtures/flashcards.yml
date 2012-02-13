@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  side_a: MyText
+  side_b: MyText
+  deck_id: 1
+
+two:
+  side_a: MyText
+  side_b: MyText
+  deck_id: 1

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ta2ed</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+
+<div id="wrapper">
+	<ul id="navigation">
+		<li><%= link_to 'New Deck', new_deck_path %></li>
+		<li><%= link_to "Decks", decks_path%></li>
+		<!-- <li> <%= link_to "Home", decks_path%></li> -->
+	</ul>
+	
+	<div id="header">
+		ta2ed
+	</div>
+	<div id="content">
+		<div id="header-title">
+			<%= yield :header_title%>
+		</div>
+		<%= yield %>
+	</div>
+	
+	<div id="footer">
+		ta2ed &copy; 2012
+	</div>
+</div>
+</body>
+</html>

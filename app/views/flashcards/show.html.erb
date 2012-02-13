@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Side a:</b>
+  <%= @flashcard.side_a %>
+</p>
+
+<p>
+  <b>Side b:</b>
+  <%= @flashcard.side_b %>
+</p>
+
+<p>
+  <b>Deck:</b>
+  <%= @flashcard.deck_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_flashcard_path(@flashcard) %> |
+<%= link_to 'Back', flashcards_path %>

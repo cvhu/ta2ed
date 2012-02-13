@@ -1,0 +1,27 @@
+<h1>Listing flashcards</h1>
+
+<table>
+  <tr>
+    <th>Side a</th>
+    <th>Side b</th>
+    <th>Deck</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @flashcards.each do |flashcard| %>
+  <tr>
+    <td><%= flashcard.side_a %></td>
+    <td><%= flashcard.side_b %></td>
+    <td><%= flashcard.deck_id %></td>
+    <td><%= link_to 'Show', flashcard %></td>
+    <td><%= link_to 'Edit', edit_flashcard_path(flashcard) %></td>
+    <td><%= link_to 'Destroy', flashcard, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Flashcard', new_flashcard_path %>

@@ -1,0 +1,26 @@
+<% content_for :header_title do%>
+	<%= @deck.title %>
+<% end %>
+  
+
+<div id="deck-edit">
+	<%= link_to 'edit', edit_deck_path(@deck) %>
+</div>
+
+<div id="deck-flashcards">
+<% if @flashcards.length==0 %>
+	empty deck
+<% else %>
+	<% @flashcards.each do |flashcard|%>
+		<div class="deck-flashcard"> 
+			<div class="deck-flashcard-a"><%= flashcard.side_a %></div>
+			<div class="deck-flashcard-b"><%= flashcard.side_b%></div>
+		</div>
+	<% end %>
+<% end %>
+<div class="deck-flashcard"> 
+	<div class="deck-flashcard-new"><%= link_to '+ flashcard', new_flashcard_path(:deck_id => @deck.id)%></div>
+</div>
+
+
+</div>
