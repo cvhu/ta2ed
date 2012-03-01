@@ -13,11 +13,17 @@ jQuery.fn.loadFlashcardsForm = function(deck_id){
 	var root = this;
 	var flashcard = $('<div class="deck-flashcard"></div>').appendTo(root);
 	var sidea_field = $('<input type="text" id="form-flashcard-a"/>').appendTo(flashcard);
-	var sideb_field = $('<input type="text" id="form-flashcard-b"/>').appendTo(flashcard);
+	var sideb_field = $('<input type="text" id="form-flashcard-b"/>').appendTo(flashcard);	
 	var submit = $('<input type="submit" id="form-flashcard-submit" value="new card"/>').appendTo(root).click(function(e){
+		var json = {
+			deck_id: deck_id,
+			side_a: $(sidea_field).val(),
+			side_b: $(sideb_field).val()
+		};
 		e.preventDefault();
 		$.ajax({
-			url: '/flashcard/create.json?deck_id='+deck_id+'&side_a='+$(sidea_field).val()+'&side_b='+$(sideb_field).val(),
+			url: '/flashcard/create.json',
+			data: json,
 			beforeSend: function(){
 				$(root).text('loading...').addClass('loading');
 			},

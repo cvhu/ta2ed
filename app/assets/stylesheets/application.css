@@ -78,14 +78,30 @@ a:hover{
 	padding: 5px;
 	margin: 10px;
 	border-radius: 5px;
+	width: 150px;
 }
 
+.deck-details{
+	padding: 5px 0px;
+}
 .deck-edit{
 	font-size: 80%;
 }
 
 .deck-title{
+	font-size: 120%;
+	display: inline-block;
 	font-weight: bold;
+}
+
+.deck-count{
+	display: inline-block;
+	font-size: 150%;
+	background: #aaa;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+	padding: 3px;
 }
 
 #deck-flashcards{
@@ -268,3 +284,5 @@ input[type=submit]{
 input[type=submit]:hover{
 	background: #000;
 }
+
+

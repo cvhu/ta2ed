@@ -6,13 +6,17 @@
 <div id="decks">
 	<% @decks.each do |deck| %>
 		<div class="deck">
-		    <div class="deck-title"><%=link_to deck.title, deck_path(deck) %></div>
-		
-			<% unless deck.user.nil?%>
-				<div class="deck-creator"><%= "by #{deck.user.name}"%></div>
-			<% else %>
-				<div class="deck-creator"><%= "by anonymous"%></div>
-			<% end %>
+			
+		    
+			<div class="deck-details">
+				<div class="deck-count"><%=deck.flashcards.count %><div class="subscript"> cards</div></div>
+				<% unless deck.user.nil?%>
+					<div class="deck-creator"><%= "by #{deck.user.name}"%></div>
+				<% else %>
+					<div class="deck-creator"><%= "by anonymous"%></div>
+				<% end %>
+			</div>
+			<div class="deck-title"><%=link_to deck.title, deck_path(deck) %></div>
 		</div>				
 	<% end %>
 </div>
