@@ -96,17 +96,47 @@ a:hover{
 	border: 1px solid #aaa;
 	border-radius: 5px;
 	padding: 0px;
+	display: inline-block;
+	width: 500px;
+}
+
+.deck-flashcard-stats{
+	margin: 20px 5px;
+	vertical-align: top;
+	display: inline-block;
+}
+
+#deck-toolbar{
+	padding: 0px;
+	margin: 15px 0px;
+}
+
+#deck-toolbar li{
+	display: inline-block;
+	list-style: none;
+	padding: 5px 10px;
+	margin: 0px;
+}
+
+.deck-flashcard-viewcount{
+	font-weight: bold;
+	font-size: 150%;
+	padding: 5px;
+}
+
+.subscript{
+	font-size: 50%;
 }
 
 .deck-flashcard-a{
-	text-align: center;
+	text-align: left;
 	color: white;
 	padding: 10px;
 	background: #aaa;
 }
 
 .deck-flashcard-b{
-	text-align: center;
+	text-align: left;
 	color: white;
 	padding: 10px;	
 	background: #555;
@@ -127,4 +157,46 @@ a:hover{
 #deck-edit a{
 	display: inline-block;
 	margin: 5px;
+}
+
+.deck-creator{
+	clear: both;
+	display: inline-block;
+	font-size: 80%;
+	color: #aaa;
+}
+
+/* Flashcard*/
+
+#flashcard{
+	width: 300px;
+	margin: 30px auto;
+	border: 3px solid #aaa;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+#flashcard-a{
+	font-size: 200%;
+	font-weight: bold;
+}
+
+#flashcard-b{
+	font-size: 110%;
+	margin: 10px;
+}
+
+#next-button{
+	display: inline-block;
+	float: right;
+}
+
+#prev-button{
+	display: inline-block;
+	float: left;
+}
+
+#quiz-view{
+	margin: 10px;
+	padding: 20px;
 }

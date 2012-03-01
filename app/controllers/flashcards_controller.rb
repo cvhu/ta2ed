@@ -46,7 +46,7 @@ class FlashcardsController < ApplicationController
     @flashcard.deck = @deck
     respond_to do |format|
       if @flashcard.save
-        format.html { redirect_to @flashcard, notice: 'Flashcard was successfully created.' }
+        format.html { redirect_to @deck, notice: 'Flashcard was successfully created.' }
         format.json { render json: @flashcard, status: :created, location: @flashcard }
       else
         format.html { render action: "new" }

@@ -41,7 +41,7 @@ class DecksController < ApplicationController
   # POST /decks.json
   def create
     @deck = Deck.new(params[:deck])
-
+    @deck.user = current_user
     respond_to do |format|
       if @deck.save
         format.html { redirect_to @deck, notice: 'Deck was successfully created.' }

@@ -15,7 +15,7 @@
 		<% if current_user %>
 			<li><%= link_to 'New Deck', new_deck_path %></li>
 			<li><%= link_to "Decks", decks_path%></li> &#8226;
-			<li><%= link_to current_user.email, user_path(current_user)%></li>
+			<li><%= link_to current_user.name, edit_user_path(current_user)%></li>
 			<li><%= link_to "Log Out", logout_path%></li>
 		<% else %>
 			<li><%= link_to 'Sign Up', signup_path %></li>

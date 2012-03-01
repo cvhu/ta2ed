@@ -10,6 +10,11 @@ Ta2ed::Application.routes.draw do
   resources :users
   resources :sessions
 
+  get "/memorize/:deck_id" => "Learning#memorize", :as => "memorize"
+  get "/memorize/:deck_id/previous/:flashcard_id" => "Learning#memorize", :as => "memorize_prev"
+  get "/quiz/:deck_id" => "learning#quiz", :as => "quiz"
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

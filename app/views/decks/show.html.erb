@@ -1,26 +1,39 @@
 <% content_for :header_title do%>
 	<%= @deck.title %>
 <% end %>
-  
 
-<div id="deck-edit">
-	<%= link_to 'edit', edit_deck_path(@deck) %>
-</div>
+<ul id="deck-toolbar">
+	<li><%= link_to 'memorize this deck', memorize_path(@deck.id)%></li>
+	<% if current_user==@deck.user%>
+		<li id="deck-edit">
+			<%= link_to 'edit', edit_deck_path(@deck) %>
+		</li>
+	<% end %>	
+</ul>
 
 <div id="deck-flashcards">
 <% if @flashcards.length==0 %>
 	empty deck
 <% else %>
 	<% @flashcards.each do |flashcard|%>
-		<div class="deck-flashcard"> 
+	<div class="deck-flashcard-div"> 
+		<div class="deck-flashcard">
 			<div class="deck-flashcard-a"><%= flashcard.side_a %></div>
 			<div class="deck-flashcard-b"><%= flashcard.side_b%></div>
 		</div>
+		<div class="deck-flashcard-stats">
+			<div class="deck-flashcard-viewcount"><%= flashcard.cardviews.count%><div class="subscript"> views</div></div>
+			
+		</div>
+		
+	</div>
 	<% end %>
 <% end %>
-<div class="deck-flashcard"> 
-	<div class="deck-flashcard-new"><%= link_to '+ flashcard', new_flashcard_path(:deck_id => @deck.id)%></div>
-</div>
 
+<% if current_user==@deck.user%>
+	<div class="deck-flashcard"> 
+		<div class="deck-flashcard-new"><%= link_to '+ flashcard', new_flashcard_path(:deck_id => @deck.id)%></div>
+	</div>
+<% end %>
 
 </div>
