@@ -16,7 +16,6 @@ jQuery.fn.loadFlashcardsForm = function(deck_id){
 	var sideb_field = $('<input type="text" id="form-flashcard-b"/>').appendTo(flashcard);
 	var submit = $('<input type="submit" id="form-flashcard-submit" value="new card"/>').appendTo(root).click(function(e){
 		e.preventDefault();
-		alert('/flashcard/create.json?deck_id='+deck_id+'&side_a='+$(sidea_field).val()+'&side_b='+$(sideb_field).val());
 		$.ajax({
 			url: '/flashcard/create.json?deck_id='+deck_id+'&side_a='+$(sidea_field).val()+'&side_b='+$(sideb_field).val(),
 			beforeSend: function(){
