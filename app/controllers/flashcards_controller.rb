@@ -82,4 +82,24 @@ class FlashcardsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  
+  
+  # =================================== JSON Requests ====================================
+  
+  def postFlashcard
+    @deck = Deck.find(params[:deck_id])    
+    @flashcard = Flashcard.new
+    @flashcard.deck = @deck
+    @flashcard.side_a = params[:side_a]
+    @flashcard.side_b = params[:side_b]
+    respond_to do |format|
+      if @flashcard.save
+        format.json { render json: @flashcard.api.to_json}
+      else
+        format.json { render json: @flashcard.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 end

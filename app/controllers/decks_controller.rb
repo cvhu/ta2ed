@@ -80,4 +80,24 @@ class DecksController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  
+  # ==============================   JSON Requests ==============================
+  def getFlashcards
+    @deck = Deck.find(params[:deck_id])
+    @flashcards = @deck.flashcards.order("created_at DESC")
+    respond_to do |format|
+      format.json {render :json => apis(@flashcards).to_json}
+    end
+  end
+  
+  
+  def apis(flashcards)
+    apis = []
+    flashcards.each do |flashcard|
+      apis << flashcard.api
+    end
+    return apis
+  end
+  
 end

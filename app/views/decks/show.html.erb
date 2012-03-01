@@ -1,3 +1,16 @@
+<% content_for(:head) do%>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			var deck_id = $("#deck-id").text();
+			$("#deck-flashcards").loadFlashcards(deck_id);
+			var new_flashcard = $("#deck-flashcard-new");
+			if ($(new_flashcard).length > 0){
+				$(new_flashcard).loadFlashcardsForm(deck_id);
+			}
+		});
+	</script>
+<% end %>
+
 <% content_for :header_title do%>
 	<%= @deck.title %>
 <% end %>
@@ -11,29 +24,12 @@
 	<% end %>	
 </ul>
 
-<div id="deck-flashcards">
-<% if @flashcards.length==0 %>
-	empty deck
-<% else %>
-	<% @flashcards.each do |flashcard|%>
-	<div class="deck-flashcard-div"> 
-		<div class="deck-flashcard">
-			<div class="deck-flashcard-a"><%= flashcard.side_a %></div>
-			<div class="deck-flashcard-b"><%= flashcard.side_b%></div>
-		</div>
-		<div class="deck-flashcard-stats">
-			<div class="deck-flashcard-viewcount"><%= flashcard.cardviews.count%><div class="subscript"> views</div></div>
-			
-		</div>
-		
-	</div>
-	<% end %>
-<% end %>
 
 <% if current_user==@deck.user%>
-	<div class="deck-flashcard"> 
-		<div class="deck-flashcard-new"><%= link_to '+ flashcard', new_flashcard_path(:deck_id => @deck.id)%></div>
+	<div id="deck-flashcard-new"> 
 	</div>
 <% end %>
 
+<div id="deck-flashcards">
+	<div id="deck-id" style="display:none;"><%= @deck.id%></div>
 </div>

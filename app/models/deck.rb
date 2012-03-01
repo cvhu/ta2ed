@@ -24,7 +24,12 @@ class Deck < ActiveRecord::Base
     views = {}    
     cards = []
     self.flashcards.each_with_index do |card, index|
-      views[card.id] = card.cardviews.where(:user_id => current_user.id).last.created_at
+      last_view = card.cardviews.where(:user_id => current_user.id).last
+      if last_view.nil?
+        views[card.id] = Time.new - Random.rand(10000)
+      else
+        views[card.id] = created_at
+      end
     end
     views.sort{|a,b| -1*(a[1]<=>b[1])}.each do |pair|
       cards << Flashcard.find(pair[0])

@@ -54,6 +54,7 @@ a:hover{
 #content{
 	margin: 10px;
 	padding: 10px;	
+	position: relative;
 }
 
 #footer{
@@ -88,13 +89,19 @@ a:hover{
 }
 
 #deck-flashcards{
+	display: block;
 	margin:20px;
+}
+
+#deck-empty{
+	color: #aaa;
+	font-size: 150%;
+	text-align: center;
+	padding: 20px;
 }
 
 .deck-flashcard{
 	margin:10px;
-	border: 1px solid #aaa;
-	border-radius: 5px;
 	padding: 0px;
 	display: inline-block;
 	width: 500px;
@@ -107,6 +114,11 @@ a:hover{
 }
 
 #deck-toolbar{
+	font-weight: bold;
+	font-size: 120%;
+	position : absolute;
+	top: -10px;
+	right: 0px;
 	padding: 0px;
 	margin: 15px 0px;
 }
@@ -129,24 +141,52 @@ a:hover{
 }
 
 .deck-flashcard-a{
+	border-radius: 5px 5px 0px 0px;
 	text-align: left;
 	color: white;
 	padding: 10px;
 	background: #aaa;
 }
 
+#form-flashcard-a{
+	border-radius: 5px 5px 0px 0px;
+	display: block;
+	text-align: left;
+	color: white;
+	padding: 10px;
+	background: #aaa;
+	width: 475px;
+	margin: 0px;
+}
+
+
 .deck-flashcard-b{
+	border-radius: 0px 0px 5px 5px;
 	text-align: left;
 	color: white;
 	padding: 10px;	
 	background: #555;
 }
 
-.deck-flashcard-new{
-	text-align: center;
+#form-flashcard-b{
+	margin: 0px;
+	border-radius: 0px 0px 5px 5px;
+	width: 475px;
+	display: block;
+	text-align: left;
 	color: white;
 	padding: 10px;	
-	background: #fc0;
+	background: #555;
+}
+
+
+#deck-flashcard-new{
+	padding: 0px;
+	margin: 20px;
+}
+
+#deck-flashcard-submit{
+	display: inline-block;
 }
 
 
@@ -199,4 +239,32 @@ a:hover{
 #quiz-view{
 	margin: 10px;
 	padding: 20px;
+}
+
+/* Form */
+
+.field{
+	padding: 3px;
+}
+
+label{
+	display: block;
+	font-weight: bold;
+	font-size: 80%;
+}
+
+input{
+	padding: 3px;
+	font-size: 120%;
+	border: 1px solid #aaa;
+}
+
+input[type=submit]{
+	color: white;
+	margin: 5px;
+	cursor: pointer;
+}
+
+input[type=submit]:hover{
+	background: #000;
 }
