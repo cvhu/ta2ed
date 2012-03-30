@@ -1,0 +1,39 @@
+<% content_for(:head) do%>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$("#next-button").hide();
+			$(".choice").click(function(e){
+				e.preventDefault();				
+				$.ajax({
+					url: $(this).attr('href'),
+					success: function(){
+						$("#next-button").fadeIn();
+					}
+				})
+				$(".choice").removeAttr("href");
+				if ($(this).hasClass('answer')){
+					$(this).addClass('correct');
+				}else{
+					$(this).addClass('wrong');
+					$(".answer").addClass('correct');
+				}
+			})
+		});
+	</script>
+<% end %>
+
+
+quiz
+<div id="quiz-view">
+	<div id="question"><%= @quiz[:question]%></div>
+	<div id="choices">
+		<% @quiz[:choices].each do |choice| %>			
+			<% if choice == @quiz[:answer]%>
+				<a href="<%= @quiz[:correct_url]%>" class="choice answer"><%= choice %></a>
+			<% else %>
+				<a href="<%= @quiz[:wrong_url]%>" class="choice"><%= choice %></a>
+			<% end %>
+		<% end %>
+	</div>
+	<%= link_to 'next', learn_deck_path(@deck), :id => 'next-button' %>
+</div>

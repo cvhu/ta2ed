@@ -16,8 +16,10 @@
 <% end %>
 
 <ul id="deck-toolbar">
-	<li><%= link_to 'memorize this deck', memorize_path(@deck.id)%></li>
-	<% if current_user==@deck.user%>
+	<% if current_user%>
+		<li>
+			<%= link_to 'quiz', learn_deck_path(@deck) %>
+		</li>
 		<li id="deck-edit">
 			<%= link_to 'edit', edit_deck_path(@deck) %>
 		</li>

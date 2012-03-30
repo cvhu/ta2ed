@@ -82,6 +82,52 @@ class DecksController < ApplicationController
   end
   
   
+  def learn
+    @deck = Deck.find(params[:id])
+    last_state = @deck.states.where(:user_id => current_user.id).last
+    if last_state.nil?
+      logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 1"
+      @flashcard = @deck.full_draw(current_user.id)
+      render :full
+    elsif last_state.value == 0
+      last2_state = @deck.states.where(:user_id => current_user.id)[-2]
+      if last2_state.nil?
+        logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 2"
+        @flashcard = @deck.full_draw(current_user.id)
+        render :full
+      elsif last2_state.value == 0
+        last3_state = @deck.states.where(:user_id => current_user.id)[-3]
+        if last3_state.nil?
+          logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 3"
+          @flashcard = @deck.full_draw(current_user.id)
+          render :full
+        elsif last3_state.value == 0
+          logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% partialview"
+          @flashcards = @deck.partial_draw(current_user.id)
+          render :partial
+        else
+          logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 2"
+          @flashcard = @deck.full_draw(current_user.id)
+          render :full
+        end
+      else
+        logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 3"
+        @flashcard = @deck.full_draw(current_user.id)
+        render :full
+      end
+    elsif last_state.value == 1 or last_state.value == 2
+      logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% quizview"
+      @quiz = @deck.quiz_draw(current_user.id)
+      render :quiz
+    elsif last_state.value == 3 or last_state.value == 4
+      logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 1"
+      @flashcard = @deck.full_draw(current_user.id) 
+      render :full
+    end
+    
+  end
+      
+  
   # ==============================   JSON Requests ==============================
   def getFlashcards
     @deck = Deck.find(params[:deck_id])
@@ -98,6 +144,18 @@ class DecksController < ApplicationController
       apis << flashcard.api
     end
     return apis
+  end
+  
+  def createState
+    @state = State.new
+    @state.user_id = current_user.id
+    @state.deck_id = params[:deck_id]
+    @state.flashcard_id = params[:flashcard_id]
+    @state.value = params[:value]
+    @state.save
+    respond_to do |format|
+      format.json {render :json => @state.to_json}
+    end
   end
   
 end

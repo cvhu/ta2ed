@@ -1,6 +1,7 @@
 class Deck < ActiveRecord::Base
   has_many :flashcards
-  belongs_to :user
+  has_many :states
+  belongs_to :user, :dependent => :destroy
   
   
   def draw
@@ -36,6 +37,68 @@ class Deck < ActiveRecord::Base
     end
     return cards
   end
+
+  def last_draw(user_id)
+    @drawed = []
+    2.times.each do |i|
+      state = self.states.where(:user_id => user_id).where(:value => 0)[-(i+1)]
+      unless state.nil?
+        @drawed << state.flashcard
+      end
+    end
+    return @drawed
+  end
   
-      
+  def full_draw(user_id)    
+    @flashcards = []
+    self.flashcards.each do |flashcard|
+      if flashcard.states.empty?
+        @flashcards << flashcard
+      elsif not self.last_draw(user_id).include?(flashcard)
+        @flashcards << flashcard
+      end
+    end
+    @flashcard = @flashcards[rand(@flashcards.length)]
+    @state = State.new
+    @state.user_id = user_id
+    @state.deck = self    
+    @state.flashcard = @flashcard
+    @state.value = 0
+    @state.save    
+    return @flashcard
+  end
+  
+  def partial_draw(user_id)
+    flashcards = []
+    3.times.each do |i|
+      flashcard = self.states.where(:user_id => user_id).where(:value => 0)[-(i+1)].flashcard
+      logger.debug "=========== PARTIALVIEW: #{-(i+1)}"
+      @state = State.new
+      @state.user_id = user_id
+      @state.deck = self
+      @state.flashcard = flashcard
+      @state.value = 1
+      @state.save
+      flashcards << flashcard
+    end
+    return flashcards
+  end
+  
+  def quiz_draw(user_id)
+    @quiz = {:choices => []}
+    r = rand(3)
+    3.times.each do |i|
+      flashcard = self.states.where(:user_id => user_id).where(:value => 0)[-(i+1)].flashcard
+      unless flashcard.nil?
+        if i==r
+          @quiz[:question] = flashcard.side_a
+          @quiz[:answer] = flashcard.side_b
+          @quiz[:correct_url] = "/create_state.json?flashcard_id=#{flashcard.id}&deck_id=#{self.id}&value=3"
+          @quiz[:wrong_url] = "/create_state.json?flashcard_id=#{flashcard.id}&deck_id=#{self.id}&value=4"
+        end
+        @quiz[:choices] << flashcard.side_b
+      end
+    end    
+    return @quiz
+  end
 end

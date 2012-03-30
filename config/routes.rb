@@ -7,15 +7,14 @@ Ta2ed::Application.routes.draw do
   get "signup" => "users#new", :as => "signup"
   resources :users
   resources :sessions
-
-  get "/memorize/:deck_id" => "Learning#memorize", :as => "memorize"
-  get "/memorize/:deck_id/previous/:flashcard_id" => "Learning#memorize", :as => "memorize_prev"
-  get "/quiz/:deck_id" => "learning#quiz", :as => "quiz"
   
+  get "learn_deck/:id" => "decks#learn", :as => "learn_deck"
   
   # JSON requests
   get "/flashcards" => "decks#getFlashcards"
   get "/flashcard/create" => "flashcards#postFlashcard"
+  
+  get "/create_state" => "decks#createState"
   
   
   # The priority is based upon order of creation:

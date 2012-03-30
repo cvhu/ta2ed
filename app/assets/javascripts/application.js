@@ -63,6 +63,5 @@ function buildFlashcard(flashcard){
 	var sidea = $('<div class="deck-flashcard-a"></div>').text(flashcard.side_a).appendTo(card);
 	var sideb = $('<div class="deck-flashcard-b"></div>').text(flashcard.side_b).appendTo(card);
 	var stats = $('<div class="deck-flashcard-stats"></div>').appendTo(root);
-	var views = $('<div class="deck-flashcard-viewcount"></div>').html(flashcard.views + '<div class="subscript">views</div>').appendTo(stats);
 	return root;
 }

@@ -1,0 +1,9 @@
+full
+
+<div id="full-view">
+	<div id="flashcard">
+		<div id="flashcard-a"><%= @flashcard.side_a%></div>
+		<div id="flashcard-b"><%= @flashcard.side_b%></div>
+	</div>
+	<%= link_to 'next', learn_deck_path(@deck), :id => 'next-button' %>
+</div>

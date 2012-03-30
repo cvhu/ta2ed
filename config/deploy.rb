@@ -1,10 +1,10 @@
-set :user, 'cvhu'
-set :domain, 'ta2ed.cvhu.org'
+set :user, 'root'
+set :domain, 'dediced.com'
 set :application, "ta2ed"
 
 set :shared_assets, %w{public/systems}
 set :repository,  "git@github.com:cvhu/ta2ed.git"
-set :deploy_to, "/home/#{user}/#{domain}"
+set :deploy_to, "/srv/www/ta2.cvhu.org"
 
 role :web, domain
 role :app, domain

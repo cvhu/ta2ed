@@ -59,6 +59,7 @@ a:hover{
 
 #footer{
 	text-align: right;
+	margin: 10px 0px;
 }
 
 #new-deck{
@@ -224,7 +225,7 @@ a:hover{
 
 /* Flashcard*/
 
-#flashcard{
+#flashcard, .flashcard{
 	width: 300px;
 	margin: 30px auto;
 	border: 3px solid #aaa;
@@ -232,19 +233,26 @@ a:hover{
 	border-radius: 5px;
 }
 
-#flashcard-a{
+#flashcard-a, .flashcard-a{
 	font-size: 200%;
 	font-weight: bold;
 }
 
-#flashcard-b{
+#flashcard-b, .flashcard-b{
 	font-size: 110%;
 	margin: 10px;
 }
 
 #next-button{
-	display: inline-block;
-	float: right;
+	font-size: 120%;
+	color: #fff;
+	background: #666;
+	padding: 5px 10px;
+	border-radius: 5px;
+	display: block;
+	position: absolute;
+	right: 0px;
+	bottom: 10px;
 }
 
 #prev-button{
@@ -286,3 +294,37 @@ input[type=submit]:hover{
 }
 
 
+/* Quiz-view*/
+#quiz-view{
+	font-size: 120%;
+}
+
+#question{
+	font-size: 200%;
+}
+
+#choices{
+	margin: 10px;
+	padding: 5px;
+}
+
+.choice{
+	display: block;
+	text-decoration: none;
+	margin: 10px 0px;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.correct{
+	background: #0f0;
+}
+
+.wrong{
+	background: #f00;
+	color: white;
+}
+
+.partial-remind{
+	font-size: 90%;
+}
