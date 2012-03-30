@@ -22,9 +22,9 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: ta2ed
+  database: ta2
   pool: 5
   timeout: 5000
-  username: cvhuorg
+  username: cvhudb
   password: owls10A3
-  host: mysql.cvhu.org
+  host: localhost
