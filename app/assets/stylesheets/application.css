@@ -95,13 +95,13 @@ body {
 
 
 a{
-	color: #999;
+	color: #000;
 	text-decoration: none;
 }
 
 
 a:hover{
-	color: #000;
+	color: #333;
 }
 
 
@@ -152,6 +152,7 @@ a:hover{
 	font-size: 120%;
 	display: inline-block;
 	font-weight: bold;
+	color: #555;
 }
 
 .deck-count{
@@ -329,6 +330,7 @@ input[type=submit]{
 	color: white;
 	margin: 5px;
 	cursor: pointer;
+	background: #333;
 }
 
 input[type=submit]:hover{
