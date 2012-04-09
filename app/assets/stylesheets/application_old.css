@@ -2,97 +2,9 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
 */
-
-
-body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  padding: 0px;
-  margin: 0px;
-  background: #555;
-}
-
-/*= navigation =*/
-#navigation{
-	width: 100%;
-	height: 40px;
-	margin: 0;
-	display: block;
-	background: #000;
-	position: relative;
-}
-
-#nav-bar{
-	vertical-align: top;
-	display:inline-block;
-}
-
-#user-bar{
-	position: absolute;
-	right: 0px;
-	vertical-align: top;
-	display:inline-block;
-}
-
-
-#navigation li{
-	height: 40px;
-	vertical-align: top;
-	display: inline-block;
-	list-style: none;
-	padding: 0px 5px;
-	margin: 0px;
-}
-
-
-#navigation a{
-	color: #ddd;
-	font-size: 125%;
-}
-
-#navigation a:hover{
-	color: #fff;
-}
-
-
-#logo{
-	height: 40px;
-}
-
-#logo-wrapper{
-	padding: 0px;
-	margin-left: 10px;
-	display: inline-block;
-}
-
-/*= other templates =*/
-
-#wrapper{	
-	width: 800px;
-	margin: 0px auto;
-}
-
-#header-title{
-	font-size: 200%;
-	color: #ddd;
-}
-
-#content{
-	margin: 10px;
-	padding: 10px;	
-	position: relative;
-}
-
-#footer{
-	color: #ccc;
-	text-align: right;
-	margin: 10px 0px;
-}
-
 
 a{
 	color: #555;
@@ -103,49 +15,78 @@ a{
 a:hover{
 	color: #000;
 }
-
-
-.prepopulate{
-	color: #999;
-	background: #eee;
+#wrapper{
+	width: 800px;
+	margin: 0px auto;
 }
 
 
-/*= New Deck =*/
+#header{
+	font-size: 150%;
+	font-weight: bold;
+	margin: 10px;
+	padding: 5px;
+	width: 100%;
+	border-bottom: 1px solid #aaa;
+}
 
-#new_deck{
+#navigation{
+	font-size: 80%;
+/*	position: relative;*/
+/*	right: 10px;*/
+/*	top: 5px;*/
+	margin-top: 0;
+	float: right;
+	display: inline-block;
+}
+
+#navigation li{
+	display: inline-block;
+	list-style: none;
+	padding: 3px;
+	margin: 5px;
+}
+
+#header-title{
+	font-size: 200%;
+}
+
+#content{
+	margin: 10px;
+	padding: 10px;	
+	position: relative;
+}
+
+#footer{
+	text-align: right;
+	margin: 10px 0px;
+}
+
+#new-deck{
 	margin: 10px;
 	width: 100%;
+	text-align: right;
 }
 
 
-
-/*= Decks =*/
 #decks{
-	margin: 20px auto;
+	margin: 20px;
 }
 
 .deck{
-	vertical-align: top;
 	display: inline-block;
 	border: 2px solid #ccc;
 	padding: 5px;
-	margin: 5px;
+	margin: 10px;
 	border-radius: 5px;
-	width: 160px;
-	background: #ddd;
-}
-
-.deck-creator{
-	clear: both;
-	display: inline-block;
-	font-size: 85%;
-	color: #777;
+	width: 150px;
 }
 
 .deck-details{
-	display: inline-block;
 	padding: 5px 0px;
+}
+.deck-edit{
+	font-size: 80%;
 }
 
 .deck-title{
@@ -163,10 +104,6 @@ a:hover{
 	text-align: center;
 	padding: 3px;
 }
-
-
-
-/*= Deck Flashcards*/
 
 #deck-flashcards{
 	display: block;
@@ -283,6 +220,13 @@ a:hover{
 	margin: 5px;
 }
 
+.deck-creator{
+	clear: both;
+	display: inline-block;
+	font-size: 80%;
+	color: #aaa;
+}
+
 /* Flashcard*/
 
 #flashcard, .flashcard{
@@ -291,7 +235,6 @@ a:hover{
 	border: 3px solid #aaa;
 	padding: 20px;
 	border-radius: 5px;
-	background: #eee;
 }
 
 #flashcard-a, .flashcard-a{
@@ -307,13 +250,13 @@ a:hover{
 #next-button{
 	font-size: 120%;
 	color: #fff;
-	background: #0ad;
+	background: #666;
 	padding: 5px 10px;
 	border-radius: 5px;
 	display: block;
 	position: absolute;
-	right: 30px;
-	bottom: 30px;
+	right: 0px;
+	bottom: 10px;
 }
 
 #prev-button{
@@ -377,10 +320,6 @@ input[type=submit]:hover{
 	border-radius: 5px;
 }
 
-.choice:hover{
-	background: #aaa;
-}
-
 .correct{
 	background: #0f0;
 }
@@ -394,11 +333,7 @@ input[type=submit]:hover{
 	font-size: 90%;
 }
 
-#quiz-view{
-	background: #eee;
-	border-radius: 5px;
-	border: 1px solid #aaa;
-}
+
 
 
 /* ------------ Deck: flashcards*/
@@ -416,6 +351,9 @@ input[type=submit]:hover{
 
 
 
+.prepopulate{
+	color: #af0;
+}
 
 
 .feedback-correct{
@@ -426,19 +364,4 @@ input[type=submit]:hover{
 .feedback-wrong{
 	color: #f00;
 	font-size: 150%;
-}
-
-
-/*= Message*/
-#message{
-	font-size: 125%;
-	width: 700px;
-	color: #fff;
-	border-radius: 5px;
-	margin: 10px auto;
-	padding: 10px;
-}
-
-.hint{
-	background: #0ad;
 }

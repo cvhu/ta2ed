@@ -1,8 +1,8 @@
 class State < ActiveRecord::Base
   
-  belongs_to :user, :dependent => :destroy
-  belongs_to :deck, :dependent => :destroy
-  belongs_to :flashcard, :dependent => :destroy
+  belongs_to :user
+  belongs_to :deck
+  belongs_to :flashcard
   
   
   

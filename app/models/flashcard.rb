@@ -1,11 +1,12 @@
 class Flashcard < ActiveRecord::Base
-  belongs_to :deck, :dependent => :destroy
-  has_many :states
+  belongs_to :deck
+  has_many :states, :dependent => :destroy
   
   def api
     api = {
+      :id => self.id,
       :side_a => self.side_a,
-      :side_b => self.side_b,
+      :side_b => self.side_b
     }
     return api
   end

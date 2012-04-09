@@ -76,11 +76,6 @@ class FlashcardsController < ApplicationController
   def destroy
     @flashcard = Flashcard.find(params[:id])
     @flashcard.destroy
-
-    respond_to do |format|
-      format.html { redirect_to flashcards_url }
-      format.json { head :ok }
-    end
   end
   
   
@@ -99,6 +94,27 @@ class FlashcardsController < ApplicationController
       else
         format.json { render json: @flashcard.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def editFlashcard
+    @flashcard = Flashcard.find(params[:id])
+    @flashcard.side_a = params[:side_a]
+    @flashcard.side_b = params[:side_b]
+    respond_to do |format|
+      if @flashcard.save
+        format.json { render json: @flashcard.api.to_json}
+      else
+        format.json { render json: @flashcard.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def removeFlashcard
+    @flashcard = Flashcard.find(params[:id])
+    @flashcard.destroy
+    respond_to do |format|
+      format.json {render json: {:message => 'success'}.to_json}
     end
   end
   

@@ -12,8 +12,8 @@
 jQuery.fn.loadFlashcardsForm = function(deck_id){
 	var root = this;
 	var flashcard = $('<div class="deck-flashcard"></div>').appendTo(root);
-	var sidea_field = $('<input type="text" id="form-flashcard-a"/>').appendTo(flashcard);
-	var sideb_field = $('<input type="text" id="form-flashcard-b"/>').appendTo(flashcard);	
+	var sidea_field = $('<input type="text" id="form-flashcard-a"/>').appendTo(flashcard).focus().prepopulateElement('front');
+	var sideb_field = $('<input type="text" id="form-flashcard-b"/>').appendTo(flashcard).prepopulateElement('back');	
 	var submit = $('<input type="submit" id="form-flashcard-submit" value="new card"/>').appendTo(root).click(function(e){
 		var json = {
 			deck_id: deck_id,
@@ -22,7 +22,7 @@ jQuery.fn.loadFlashcardsForm = function(deck_id){
 		};
 		e.preventDefault();
 		$.ajax({
-			url: '/flashcard/create.json',
+			url: '/api/flashcard/create.json',
 			data: json,
 			beforeSend: function(){
 				$(root).text('loading...').addClass('loading');
@@ -40,7 +40,7 @@ jQuery.fn.loadFlashcardsForm = function(deck_id){
 jQuery.fn.loadFlashcards = function(deck_id){
 	var root = this;
 	$.ajax({
-		url: '/flashcards.json?deck_id='+deck_id,
+		url: '/api/flashcards.json?deck_id='+deck_id,
 		beforeSend: function(){
 			$(root).text('loading...').addClass('loading');
 		},
@@ -57,11 +57,100 @@ jQuery.fn.loadFlashcards = function(deck_id){
 	})
 }
 
+jQuery.fn.editFlashcard = function(flashcard){
+	var card_div = this;
+	$(card_div).hide();
+
+	var edit_div = $('<div class="deck-flashcard"></div>').insertBefore(card_div);
+	var sidea_field = $('<input type="text" id="form-flashcard-a"/>').val(flashcard.side_a).appendTo(edit_div);
+	var sideb_field = $('<input type="text" id="form-flashcard-b"/>').val(flashcard.side_b).appendTo(edit_div);	
+	var submit = $('<input type="submit" id="form-flashcard-submit" value="save"/>').appendTo(edit_div).click(function(e){
+		var json = {
+			id: flashcard.id,
+			side_a: $(sidea_field).val(),
+			side_b: $(sideb_field).val()
+		};
+		e.preventDefault();
+		$.ajax({
+			url: '/api/flashcard/edit.json',
+			data: json,
+			beforeSend: function(){
+				$(edit_div).addClass('loading');
+			},
+			success: function(data){
+				$(edit_div).removeClass('loading').remove();
+				var saved_card = buildFlashcard(data);
+				$(saved_card).insertBefore(card_div);
+				$(card_div).remove();
+			}
+		})
+		
+	});
+	var cancel = $('<input type="submit" value="cancel"/>').appendTo(edit_div).click(function(e){
+		e.preventDefault();
+		$(edit_div).remove();
+		$(card_div).show();
+	})
+}
+
 function buildFlashcard(flashcard){
 	var root = $('<div class="deck-flashcard-div"></div>');
 	var card = $('<div class="deck-flashcard"></div>').appendTo(root);
 	var sidea = $('<div class="deck-flashcard-a"></div>').text(flashcard.side_a).appendTo(card);
 	var sideb = $('<div class="deck-flashcard-b"></div>').text(flashcard.side_b).appendTo(card);
 	var stats = $('<div class="deck-flashcard-stats"></div>').appendTo(root);
+	$(root).hover(function(){
+		$(this).addClass('card-hovered');
+		var tools = $('<div class="deck-flashcard-tools"></div>');
+		var edit = $('<a href="#" class="deck-flashcard-edit"></a>').text('edit').appendTo(tools);
+		var remove = $('<a href="#" class="deck-flashcard-remove"></a>')
+			.attr('data-confirm', 'Are you sure you want to remove this card permanently?')
+			.text('remove').appendTo(tools);
+		$(edit).click(function(e){
+			e.preventDefault();
+			$(root).editFlashcard(flashcard);
+		})
+		$(remove).click(function(e){
+			e.preventDefault();
+			$.ajax({
+				url: '/api/flashcard/remove?id='+flashcard.id,
+				success: function(){
+					$(root).fadeOut().remove();
+				}
+			})
+		})
+		$(tools).hide().appendTo(this).fadeIn();
+		
+	},function(){
+		$(this).removeClass('card-hovered');
+		$(this).find('.deck-flashcard-tools').fadeOut().remove();
+	})
 	return root;
 }
+
+jQuery.fn.prepopulateElement = function(defvalue) {
+	var selector = this;
+	$(selector).attr('placeholder', defvalue);
+   	$(selector).each(function() {
+       if($.trim(this.value) == "") {
+           this.value = defvalue;
+		   $(selector).addClass('prepopulate');
+       }
+   	});
+ 
+   	$(selector).bind('change keyup focus click blur',function() {
+       if(this.value == defvalue) {
+			$(selector).removeClass('prepopulate');
+            this.value = "";
+
+       }
+   	});
+   
+   	$(selector).blur(function() {
+       if($.trim(this.value) == "") {
+           this.value = defvalue;
+		   $(selector).addClass('prepopulate');
+       }
+   	});
+	return selector;
+};

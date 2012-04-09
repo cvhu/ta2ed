@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :decks
-  has_many :states
+  has_many :decks, :dependent => :destroy
+  has_many :states, :dependent => :destroy
   
   attr_accessible :email, :password, :password_confirmation, :name
   has_secure_password

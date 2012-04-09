@@ -1,7 +1,7 @@
 class Deck < ActiveRecord::Base
-  has_many :flashcards
-  has_many :states
-  belongs_to :user, :dependent => :destroy
+  has_many :flashcards, :dependent => :destroy
+  has_many :states, :dependent => :destroy
+  belongs_to :user
   
   
   def draw

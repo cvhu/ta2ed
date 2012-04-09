@@ -1,6 +1,6 @@
 Ta2ed::Application.routes.draw do
   
-  resources :decks
+  resources :decks, :flashcards
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
@@ -11,8 +11,10 @@ Ta2ed::Application.routes.draw do
   get "learn_deck/:id" => "decks#learn", :as => "learn_deck"
   
   # JSON requests
-  get "/flashcards" => "decks#getFlashcards"
-  get "/flashcard/create" => "flashcards#postFlashcard"
+  get "/api/flashcards" => "decks#getFlashcards"
+  get "/api/flashcard/create" => "flashcards#postFlashcard"
+  get "/api/flashcard/edit" => "flashcards#editFlashcard"
+  get "/api/flashcard/remove" => "flashcards#removeFlashcard"
   
   get "/create_state" => "decks#createState"
   

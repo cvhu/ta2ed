@@ -17,9 +17,11 @@
 
 <ul id="deck-toolbar">
 	<% if current_user%>
-		<li>
-			<%= link_to 'quiz', learn_deck_path(@deck) %>
-		</li>
+		<% if @deck.flashcards.count >= 3%>
+			<li>
+				<%= link_to 'learn', learn_deck_path(@deck) %>
+			</li>
+		<% end %>
 		<li id="deck-edit">
 			<%= link_to 'edit', edit_deck_path(@deck) %>
 		</li>

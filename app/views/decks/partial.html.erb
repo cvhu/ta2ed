@@ -14,10 +14,7 @@
 	</script>
 <% end %>
 
-
-partial
-
-<div id="partial-view">
+<div id="partial-view" class="learn-view">
 	<% @flashcards.each do |flashcard| %>
 		<div class="flashcard">
 			<div class="flashcard-a"><%= flashcard.side_a%></div> <a href="#" class="partial-remind">remind me</a> <div class="flashcard-b"><%= flashcard.side_b%></div>

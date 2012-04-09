@@ -11,20 +11,22 @@
 					}
 				})
 				$(".choice").removeAttr("href");
-				if ($(this).hasClass('answer')){
-					$(this).addClass('correct');
-				}else{
-					$(this).addClass('wrong');
-					$(".answer").addClass('correct');
+				if (!$('#next-button').is(":visible")){
+					if ($(this).hasClass('answer')){
+						$(this).addClass('correct');
+						var feedback = $('<div class="feedback-correct"></div>').text('correct!').appendTo($("#choices"));
+					}else{
+						$(this).addClass('wrong');
+						$(".answer").addClass('correct');
+						var feedback = $('<div class="feedback-wrong"></div>').text('Did you forget this one?').appendTo($("#choices"));
+					}		
 				}
 			})
 		});
 	</script>
 <% end %>
-
-
-quiz
-<div id="quiz-view">
+<div id="message" class="hint"> Choose the correct answer </div>
+<div id="quiz-view" class="learn-view">
 	<div id="question"><%= @quiz[:question]%></div>
 	<div id="choices">
 		<% @quiz[:choices].each do |choice| %>			

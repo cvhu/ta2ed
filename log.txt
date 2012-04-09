@@ -1,5 +1,21 @@
+
+= Feedback from meeting on 3/26
+1. disable link after clicked
+2. edit deck: 'show' => 'cancel'
+3. prevent invalid flashcard creation
+4. edit/destroy flashcards 
+
+= Feedback from Mat =
+1. button color not visible for some monitors
+2. instruction (create new deck, quiz)
+3. side-a/side-b differentiation
+4. hide quiz button if deck has less than three cards
+5. correct/wrong hint for quiz
+
 meeting 03-19
 
 Come up with a quiz prototype and put it online
 
 Pierre on graphical design
+
+
