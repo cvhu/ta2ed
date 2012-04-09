@@ -11,10 +11,10 @@
 
 jQuery.fn.loadFlashcardsForm = function(deck_id){
 	var root = this;
-	var flashcard = $('<div class="deck-flashcard"></div>').appendTo(root);
+	var flashcard = $('<div class="flashcard"></div>').appendTo(root);
 	var sidea_field = $('<input type="text" id="form-flashcard-a"/>').appendTo(flashcard).focus().prepopulateElement('front');
-	var sideb_field = $('<input type="text" id="form-flashcard-b"/>').appendTo(flashcard).prepopulateElement('back');	
-	var submit = $('<input type="submit" id="form-flashcard-submit" value="new card"/>').appendTo(root).click(function(e){
+	var sideb_field = $('<textarea type="text" id="form-flashcard-b"/>').appendTo(flashcard).prepopulateElement('back');	
+	var submit = $('<input type="submit" id="form-flashcard-submit" value="new card"/>').appendTo(flashcard).click(function(e){
 		var json = {
 			deck_id: deck_id,
 			side_a: $(sidea_field).val(),
@@ -61,9 +61,9 @@ jQuery.fn.editFlashcard = function(flashcard){
 	var card_div = this;
 	$(card_div).hide();
 
-	var edit_div = $('<div class="deck-flashcard"></div>').insertBefore(card_div);
+	var edit_div = $('<div class="flashcard"></div>').insertBefore(card_div);
 	var sidea_field = $('<input type="text" id="form-flashcard-a"/>').val(flashcard.side_a).appendTo(edit_div);
-	var sideb_field = $('<input type="text" id="form-flashcard-b"/>').val(flashcard.side_b).appendTo(edit_div);	
+	var sideb_field = $('<textarea type="text" id="form-flashcard-b"/>').val(flashcard.side_b).appendTo(edit_div);	
 	var submit = $('<input type="submit" id="form-flashcard-submit" value="save"/>').appendTo(edit_div).click(function(e){
 		var json = {
 			id: flashcard.id,
@@ -94,10 +94,10 @@ jQuery.fn.editFlashcard = function(flashcard){
 }
 
 function buildFlashcard(flashcard){
-	var root = $('<div class="deck-flashcard-div"></div>');
-	var card = $('<div class="deck-flashcard"></div>').appendTo(root);
-	var sidea = $('<div class="deck-flashcard-a"></div>').text(flashcard.side_a).appendTo(card);
-	var sideb = $('<div class="deck-flashcard-b"></div>').text(flashcard.side_b).appendTo(card);
+	var root = $('<div class="flashcard-div"></div>');
+	var card = $('<div class="flashcard"></div>').appendTo(root);
+	var sidea = $('<div class="flashcard-a"></div>').text(flashcard.side_a).appendTo(card);
+	var sideb = $('<div class="flashcard-b"></div>').text(flashcard.side_b).appendTo(card);
 	var stats = $('<div class="deck-flashcard-stats"></div>').appendTo(root);
 	$(root).hover(function(){
 		$(this).addClass('card-hovered');

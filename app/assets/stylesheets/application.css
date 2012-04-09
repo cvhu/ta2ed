@@ -95,7 +95,7 @@ body {
 
 
 a{
-	color: #555;
+	color: #999;
 	text-decoration: none;
 }
 
@@ -138,7 +138,7 @@ a:hover{
 
 .deck-creator{
 	clear: both;
-	display: inline-block;
+	display: block;
 	font-size: 85%;
 	color: #777;
 }
@@ -224,43 +224,24 @@ a:hover{
 	font-size: 50%;
 }
 
-.deck-flashcard-a{
-	border-radius: 5px 5px 0px 0px;
-	text-align: left;
-	color: white;
-	padding: 10px;
-	background: #aaa;
-}
-
 #form-flashcard-a{
 	border-radius: 5px 5px 0px 0px;
 	display: block;
-	text-align: left;
-	color: white;
 	padding: 10px;
-	background: #aaa;
-	width: 475px;
+/*	width: 475px;*/
 	margin: 0px;
-}
-
-
-.deck-flashcard-b{
-	border-radius: 0px 0px 5px 5px;
-	text-align: left;
-	color: white;
-	padding: 10px;	
-	background: #555;
+	font-size: 200%;
 }
 
 #form-flashcard-b{
 	margin: 0px;
 	border-radius: 0px 0px 5px 5px;
-	width: 475px;
+/*	width: 475px;*/
 	display: block;
-	text-align: left;
-	color: white;
 	padding: 10px;	
-	background: #555;
+	font-size: 110%;
+	width: 80%;
+	
 }
 
 
@@ -402,19 +383,30 @@ input[type=submit]:hover{
 
 
 /* ------------ Deck: flashcards*/
+.flashcard-div{
+	padding: 10px;
+}
 
 .card-hovered{
-	background: #ffa;
+/*	background: #eee;*/
+}
+
+.deck-flashcard-tools{
+	float: right;
 }
 
 .deck-flashcard-tools>a{
 	vertical-align: top;
 	display: inline-block;
-	margin: 2px;
+	margin: 10px;
 	padding: 3px;
+	font-size: 150%;
+	color: #fff;
 }
 
-
+.deck-flashcard-tools>a:hover{
+	color: #aaa;
+}
 
 
 
