@@ -1,3 +1,10 @@
+= Feedback from meeting on 4/9 =
+1. closer flashcards
+2. dual stylesheets
+3. EnTypo
+4. States Histogram
+5. Progress Bar
+
 
 = Feedback from meeting on 3/26
 1. disable link after clicked

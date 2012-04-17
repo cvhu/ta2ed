@@ -1,0 +1,35 @@
+<% content_for :head do%>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+			$("#learn-begin-button").click(function(e){
+				e.preventDefault();
+				$("#learn-config").fadeOut().remove();
+				$("#learn-wrapper").loadLearnAPI();
+			})
+		})
+	</script>
+<% end %>
+
+<% content_for :header_title do%>
+	Learn <%= @deck.title%>
+<% end %>
+
+
+<div id="learn-wrapper">
+	<div id="learn-config">
+		<div id="learn-mode" class="learn-config-field">
+			<div class="learn-config-title"> Mode </div>
+			<input type="radio" name="mode" value="standard"/>Standard
+			<input type="radio" name="mode" value="quiz-only"/>Quiz Only
+		</div>
+		<div id="learn-terminate" class="learn-config-field"> 
+			<div class="learn-config-title"> When to end? </div>
+			<div id="learn-terminate-choose">
+				<input type="radio" name="terminate" value="progress"/> Till All Cards Learned 
+				<input type="radio" name="terminate" value="timer"/> Set Timer for<input type="text" size="5" id="learn-terminate-timer"/> Minutes
+			</div>
+		</div>
+	
+		<a href="#" id="learn-begin-button"> Begin! </a>
+	</div>
+</div>

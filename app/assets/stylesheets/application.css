@@ -2,157 +2,184 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
+
 */
 
 
+/* ####### ##### */
+/* GENERIC STUFF */
+
 body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  padding: 0px;
-  margin: 0px;
-  background: #555;
+	background-color: grey;
+	background-image: url('textures/furley_bg.png');
+	font-family: 'Palatino Linotype', 'Palatino', serif;
+	width: 700px;
+	margin: auto;
 }
 
-/*= navigation =*/
-#navigation{
-	width: 100%;
-	height: 40px;
+a{
+	color: #777;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #222;
+}
+
+
+
+/* ##########*/
+/* NAVIGATION */
+
+#navigation {
 	margin: 0;
-	display: block;
-	background: #000;
+	padding: 0;
+	background-color: #444;
+	background-image: url('textures/broken_noise.png');
+	
 	position: relative;
+		z-index: 10;
+	
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
 }
 
-#nav-bar{
-	vertical-align: top;
-	display:inline-block;
+#logo-wrapper {
+	position: relative;
+		top: 5px;
+		left: 5px;
 }
 
-#user-bar{
-	position: absolute;
-	right: 0px;
-	vertical-align: top;
-	display:inline-block;
+#navigation ul{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+#nav-bar {
+	padding: 0 0.5em 0 10em !important;
+	border-right: 1px solid #666;
 }
 
 
 #navigation li{
-	height: 40px;
-	vertical-align: top;
 	display: inline-block;
-	list-style: none;
-	padding: 0px 5px;
+	list-style-type: none;
+	padding: 0 0 10px 0;
+	margin: 0;
+	
+	font-size: 120%;
+}
+
+#navigation li a {
+	color: #DDD;
+	padding: 7px 7px 5px 7px;
+}
+#navigation li a:hover {
+	color: #222;
+	background-color: #FEFEF9;
+	border-radius: 3px;
+	
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3) inset;
+}
+
+
+
+/* ####### */
+/* WRAPPER */
+
+#wrapper {
 	margin: 0px;
+	background-color: #FEFEF9;
+	
+	position: relative;
+		z-index: 5;
+		
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
 
-
-#navigation a{
-	color: #ddd;
-	font-size: 125%;
-}
-
-#navigation a:hover{
-	color: #fff;
-}
-
-
-#logo{
-	height: 40px;
-}
-
-#logo-wrapper{
-	padding: 0px;
-	margin-left: 10px;
-	display: inline-block;
-}
-
-/*= other templates =*/
-
-#wrapper{	
-	width: 800px;
-	margin: 0px auto;
-}
-
-#header-title{
-	font-size: 200%;
-	color: #ddd;
-}
 
 #content{
-	margin: 10px;
+	margin: 0px;
 	padding: 10px;	
 	position: relative;
 }
 
+#header-title {
+	width: 50%;
+	
+	font-family: Verdana, sans-serif;
+	font-weight: bold;
+	font-size: 2em;
+	color: #444;
+	
+	text-shadow: 1px 1px 1px white,
+				-1px -1px 1px rgba(0, 0, 0, 0.3);
+}
+
 #footer{
-	color: #ccc;
 	text-align: right;
+	float: right;
 	margin: 10px 0px;
+	padding-top: 10px;
+	
+	width: 10em;
+	
+	border-top: 1px solid #aaa;
+	
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3),
+				-1px -1px 1px rgba(0, 0, 0, 0.1);
 }
 
-
-a{
-	color: #000;
-	text-decoration: none;
-}
-
-
-a:hover{
-	color: #333;
-}
-
-
-.prepopulate{
-	color: #999;
-	background: #eee;
-}
-
-
-/*= New Deck =*/
-
-#new_deck{
+#new-deck{
 	margin: 10px;
 	width: 100%;
+	text-align: right;
 }
 
 
-
-/*= Decks =*/
 #decks{
-	margin: 20px auto;
+	margin: 20px;
 }
 
 .deck{
-	vertical-align: top;
 	display: inline-block;
-	border: 2px solid #ccc;
-	padding: 5px;
-	margin: 5px;
+	padding: 10px 5px 10px 5px;
+	margin: 10px;
 	border-radius: 5px;
-	width: 160px;
-	background: #ddd;
-}
-
-.deck-creator{
-	clear: both;
-	display: block;
-	font-size: 85%;
-	color: #777;
+	width: 280px;
+	
+	background-color: white;
+	background-image: url('textures/exclusive_paper.png');
+	
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3),/*Floating paper*/
+				1px 1px 1px rgba(255, 255, 255, 0.5) inset,
+				-1px -1px 1px rgba(0, 0, 0, 0.6) inset;
+				
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5),
+				-1px -1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .deck-details{
-	display: inline-block;
 	padding: 5px 0px;
+	margin-left: 10px;
+}
+.deck-edit{
+	font-size: 80%;
 }
 
 .deck-title{
-	font-size: 120%;
+	width: 90%;
+	font-size: 150%;
 	display: inline-block;
 	font-weight: bold;
-	color: #555;
+	margin: 0.5em 0 0.4em 0.5em;
+}
+.deck-title a {
+	color: #222;
+	color: #222;
+}
+.deck-title a:hover {
+	color: #777;
 }
 
 .deck-count{
@@ -163,11 +190,9 @@ a:hover{
 	border-radius: 5px;
 	text-align: center;
 	padding: 3px;
+	
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2) inset;
 }
-
-
-
-/*= Deck Flashcards*/
 
 #deck-flashcards{
 	display: block;
@@ -183,13 +208,9 @@ a:hover{
 
 .deck-flashcard{
 	margin:10px;
-	padding: 10px;
+	padding: 0px;
 	display: inline-block;
 	width: 500px;
-}
-
-.deck-flashcard-tools{
-	display: inline-block;
 }
 
 .deck-flashcard-stats{
@@ -211,8 +232,17 @@ a:hover{
 #deck-toolbar li{
 	display: inline-block;
 	list-style: none;
-	padding: 5px 10px;
+	padding: 2px;
 	margin: 0px;
+}
+
+#deck-toolbar li a {
+	padding: 7px 7px 5px 7px;
+	border-radius: 3px;
+}
+#deck-toolbar li a:hover {
+	background-color: #333;
+	color: white;
 }
 
 .deck-flashcard-viewcount{
@@ -225,26 +255,58 @@ a:hover{
 	font-size: 50%;
 }
 
-#form-flashcard-a{
+.deck-flashcard-a{
 	border-radius: 5px 5px 0px 0px;
-	display: block;
+	text-align: left;
+	color: white;
 	padding: 10px;
-/*	width: 475px;*/
+	background: #aaa;
+}
+
+#form-flashcard-a{
+	border-radius: 5px 0px 0px 0px;
+	display: block;
+	text-align: left;
+	
+	font-family: Verdana, sans-serif;
+	color: white;
+	padding: 10px;
+	background: #aaa;
+	width: 94%;
+	max-width: 94%;
 	margin: 0px;
-	font-size: 200%;
+	
+	border: none;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5) inset;
+}
+
+
+.deck-flashcard-b{
+	border-radius: 0px 0px 5px 5px;
+	text-align: left;
+	color: white;
+	padding: 10px;	
+	background: #555;
 }
 
 #form-flashcard-b{
 	margin: 0px;
-	border-radius: 0px 0px 5px 5px;
-/*	width: 475px;*/
+	border-radius: 0px 0px 0px 5px;
+	width: 94%;
+	max-width: 94%;
 	display: block;
-	padding: 10px;	
-	font-size: 110%;
-	width: 80%;
+	text-align: left;
 	
+	font-family: 'Palatino Linotype', Palatino, serif;
+	font-size: 120%;
+	color: white;
+	
+	padding: 10px;	
+	background: #555;
+	
+	border: none;
+	box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.5) inset;
 }
-
 
 #deck-flashcard-new{
 	padding: 0px;
@@ -265,174 +327,261 @@ a:hover{
 	margin: 5px;
 }
 
-/* Flashcard*/
-
-#flashcard, .flashcard{
-	width: 300px;
-	margin: 30px auto;
-	border: 3px solid #aaa;
-	padding: 20px;
-	border-radius: 5px;
-	background: #eee;
-}
-
-#flashcard-a, .flashcard-a{
-	font-size: 200%;
-	font-weight: bold;
-}
-
-#flashcard-b, .flashcard-b{
-	font-size: 110%;
-	margin: 10px;
-}
-
-#next-button{
-	font-size: 120%;
-	color: #fff;
-	background: #0ad;
-	padding: 5px 10px;
-	border-radius: 5px;
-	display: block;
-	position: absolute;
-	right: 30px;
-	bottom: 30px;
-}
-
-#prev-button{
+.deck-creator{
+	clear: both;
 	display: inline-block;
-	float: left;
+	font-size: 100%;
+	color: #888;
+	
+	width: 90%;
+	text-align: right;
 }
 
-#quiz-view{
-	margin: 10px;
-	padding: 20px;
+/* FLASHCARD*/
+	
+	#flashcard, .flashcard,
+	#next-button, #form-flashcard-submit{
+		box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3),/*Floating paper*/
+					1px 1px 1px rgba(255, 255, 255, 0.3) inset,
+					-1px -1px 1px rgba(0, 0, 0, 0.5) inset;
+					
+		text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5),
+					-1px -1px 1px rgba(0, 0, 0, 0.3);
+	}
+	
+	#flashcard, .flashcard, .choice{
+		width: 350px;
+		margin: 30px 50px 30px 70px;
+		padding: 1em;
+		
+		color: #222;
+
+		background-color: #DDD;
+		background-image: url('textures/exclusive_paper.png');
+		
+		border-bottom-left-radius: 0.5em;
+		border-top-left-radius: 0.5em;
+		
+		position: relative;
+	}
+	
+	#flashcard-a, 
+	.flashcard-a,
+	#flashcard-b, 
+	.flashcard-b {
+		margin: 0.5em;
+	}
+	#flashcard-a, .flashcard-a{
+		font-size: 200%;
+		font-weight: bold;
+		
+		font-family: Verdana, sans-serif;
+	}
+	
+	#flashcard-b, .flashcard-b{
+		font-size: 200%;
+		
+		font-family: "Palatino Linotype", Palatino, serif;
+	}
+	
+	#next-button, #form-flashcard-submit{
+		font-family: Palatino, sans-serif;
+		font-size: 150%;
+		color: #0D8800;
+		background: rgba(116, 233, 104, 0.8);
+		padding: 11px 15px 8px 15px;
+		border-radius: 0px;
+		border-bottom-right-radius: 0.5em;
+		border-top-right-radius: 0.5em;
+		
+		display: inline-block;
+		position: absolute;
+			left: 20em;
+			bottom: 1.7em;
+
+	}
+	#quiz-view #next-button {
+		margin-left: 1rem;
+	}
+	#form-flashcard-submit {
+		position: absolute;
+			left: 16.5em;
+			top: 84px;
+			
+		height: 2em;
+	}
+	#next-button:hover,
+	#form-flashcard-submit:hover {
+	
+		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5),/*Floating paper*/
+					1px 1px 1px rgba(255, 255, 255, 0.5) inset,
+					-1px -1px 1px rgba(0, 0, 0, 0.5) inset,
+					0px 0px 20px rgba(0, 255, 0, 0.5);
+	}
+	
+	#prev-button{
+		display: inline-block;
+		float: left;
+	}
+	
+	#quiz-view{
+		margin: 10px;
+		padding: 20px;
+	}
+	
+	.feedback-correct, .feedback-wrong {
+		padding-left: 2em;
+		
+		font-family: Verdana, sans-serif;
+		font-size: 1.2em;
+		font-style: italic;
+		
+		text-shadow: 1px 1px 1px white,
+					-1px -1px 1px rgba(0, 0, 0, 0.3);
+	}
+	.feedback-correct {
+		color: #009900;
+	}
+	.feedback-wrong {
+		color: #990000;
+	}
+	
+/* FORM */
+	
+	.field{
+		padding: 3px;
+	}
+	
+	label{
+		display: block;
+		font-weight: bold;
+		font-size: 80%;
+	}
+	
+	input{
+		padding: 3px;
+		font-size: 120%;
+		border: 1px solid #aaa;
+	}
+	
+	input[type=submit]{
+		color: white;
+		margin: 5px;
+		cursor: pointer;
+	}
+	
+	input[type=submit]:hover{
+		background: #000;
+	}
+	
+	
+/* QUIZ-VIEW */
+	#quiz-view{
+		font-size: 120%;
+		width: 20em;
+	}
+	
+	#question{
+		font-size: 200%;
+		
+		text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5),
+					-1px -1px 1px rgba(0, 0, 0, 0.3);
+	}
+	#question:after {
+		content: ':';
+	}
+	
+	#choices{
+		margin: 10px;
+		padding: 5px;
+		
+		text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4),
+					-1px -1px 1px rgba(0, 0, 0, 0.2);
+		
+	}
+	
+	.choice{	
+		display: block;
+		text-decoration: none;
+		margin: 10px 0px;
+		padding: 20px 15px 20px 15px;
+		border-radius: 5px 0 0 5px;
+		background-image: url('../images/exclusive_paper.png');
+		
+		color: #222;
+		
+		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3),/*Floating paper*/
+					1px 1px 1px rgba(255, 255, 255, 0.5) inset,
+					-1px -1px 1px rgba(0, 0, 0, 0.4) inset;
+	}
+	.choice:hover {
+		color: #777;
+	}
+	
+	.correct{
+		background: #74E868;
+	}
+	.wrong{
+		background: #FF9473;
+	}
+	
+	.correct:hover, .wrong:hover {
+		color: white;
+	}
+	
+	.partial-remind{
+		font-size: 120%;
+		color: #888;
+		margin-left: 2em;
+	}
+	
+	#quiz-view #next-button{
+		
+		display: inline-block;
+		position: relative;
+			left: 14em;
+			bottom: 2.7em;
+	}
+
+/* ####### ########## */
+/* New Deck Page */
+form#new_deck, form#edit_user_1 {
+	margin: 5em;
 }
 
-/* Form */
-
-.field{
-	padding: 3px;
+#deck_title, input[id="user_name"] {
+	color: #999;
+	border: none;
+	background-color: #555;
+	
+	padding: 7px;
+	
+	border-top-left-radius: 0.5em;
+	border-bottom-left-radius: 0.5em;
+	
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) inset;
 }
+input[name="commit"] {
+	border: none;
 
-label{
-	display: block;
-	font-weight: bold;
-	font-size: 80%;
+	padding: 7px;
+	
+	color: #0D8800;
+	background: rgba(116, 233, 104, 0.8);
+	
+	border-top-right-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5),
+				1px 1px 1px rgba(255, 255, 255, 0.5) inset,
+				-1px -1px 1px rgba(0, 0, 0, 0.3) inset;
+				
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5),
+				-1px -1px 1px rgba(0, 0, 0, 0.3);
 }
-
-input{
-	padding: 3px;
-	font-size: 120%;
-	border: 1px solid #aaa;
-}
-
-input[type=submit]{
-	color: white;
-	margin: 5px;
-	cursor: pointer;
-	background: #333;
-}
-
-input[type=submit]:hover{
-	background: #000;
-}
-
-
-/* Quiz-view*/
-#quiz-view{
-	font-size: 120%;
-}
-
-#question{
-	font-size: 200%;
-}
-
-#choices{
-	margin: 10px;
-	padding: 5px;
-}
-
-.choice{
-	display: block;
-	text-decoration: none;
-	margin: 10px 0px;
-	padding: 10px;
-	border-radius: 5px;
-}
-
-.choice:hover{
-	background: #aaa;
-}
-
-.correct{
-	background: #0f0;
-}
-
-.wrong{
-	background: #f00;
-	color: white;
-}
-
-.partial-remind{
-	font-size: 90%;
-}
-
-#quiz-view{
-	background: #eee;
-	border-radius: 5px;
-	border: 1px solid #aaa;
-}
-
-
-/* ------------ Deck: flashcards*/
-.flashcard-div{
-	padding: 10px;
-}
-
-.card-hovered{
-/*	background: #eee;*/
-}
-
-.deck-flashcard-tools{
-	float: right;
-}
-
-.deck-flashcard-tools>a{
-	vertical-align: top;
-	display: inline-block;
-	margin: 10px;
-	padding: 3px;
-	font-size: 150%;
-	color: #fff;
-}
-
-.deck-flashcard-tools>a:hover{
-	color: #aaa;
+input[name="commit"]:hover {
+	background-color: rgba(116, 233, 104, 1);
 }
 
 
 
-.feedback-correct{
-	color: #0a0;
-	font-size: 150%;
-}
-
-.feedback-wrong{
-	color: #f00;
-	font-size: 150%;
-}
-
-
-/*= Message*/
-#message{
-	font-size: 125%;
-	width: 700px;
-	color: #fff;
-	border-radius: 5px;
-	margin: 10px auto;
-	padding: 10px;
-}
-
-.hint{
-	background: #0ad;
-}

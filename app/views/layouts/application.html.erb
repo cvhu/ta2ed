@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>Ta2</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
+
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= yield(:head)%>
@@ -13,7 +16,7 @@
 <div id="navigation">
 	<a href="/" id="logo-wrapper"><%= image_tag 'logo.png', :id => 'logo'%></a>
 	<ul id="nav-bar">
-		<li><%= link_to "Decks", decks_path%></li> &#8226;
+		<li><%= link_to "Decks", decks_path%></li>
 		<% if current_user %>
 			<li><%= link_to 'New Deck', new_deck_path %></li>			
 		<% end %>

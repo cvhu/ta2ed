@@ -9,12 +9,16 @@ Ta2ed::Application.routes.draw do
   resources :sessions
   
   get "learn_deck/:id" => "decks#learn", :as => "learn_deck"
+  get "/learn_deck/:id/prepare" => "decks#prepareLearn", :as => "prepare_learn_deck"
+  
   
   # JSON requests
   get "/api/flashcards" => "decks#getFlashcards"
   get "/api/flashcard/create" => "flashcards#postFlashcard"
   get "/api/flashcard/edit" => "flashcards#editFlashcard"
   get "/api/flashcard/remove" => "flashcards#removeFlashcard"
+  
+  get "/api/learn" => "decks#learnAPI"
   
   get "/create_state" => "decks#createState"
   

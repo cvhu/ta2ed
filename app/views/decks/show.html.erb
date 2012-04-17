@@ -7,6 +7,7 @@
 			if ($(new_flashcard).length > 0){
 				$(new_flashcard).loadFlashcardsForm(deck_id);
 			}
+			
 		});
 	</script>
 <% end %>
@@ -20,6 +21,10 @@
 		<% if @deck.flashcards.count >= 3%>
 			<li>
 				<%= link_to 'learn', learn_deck_path(@deck) %>
+			</li>
+			
+			<li>
+				<%= link_to 'new learn', prepare_learn_deck_path(@deck) %>
 			</li>
 		<% end %>
 		<li id="deck-edit">

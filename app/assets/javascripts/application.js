@@ -93,7 +93,39 @@ jQuery.fn.editFlashcard = function(flashcard){
 	})
 }
 
-function buildFlashcard(flashcard){
+var confirmClickHandler = function (event) {
+        if ($(event.currentTarget).data('isConfirming')) return;
+        var message = event.currentTarget.attributes['data-confirm'].value;
+        event.preventDefault();
+        $('<div></div>')
+                .html(message)
+                .dialog({
+                    title: "Confirm",
+                    buttons: {
+                        "Yes": function () {
+                            $(this).dialog("close");
+                            $(event.currentTarget).data('isConfirming', true);
+                            event.currentTarget.click();
+							$.ajax({
+								url: '/api/flashcard/remove?id='+flashcard.id,
+								success: function(){
+									$(root).fadeOut().remove();
+								}
+							})
+                            $(event.currentTarget).data('isConfirming', null);
+                        },
+                        "No": function () {
+                            $(this).dialog("close");
+                        }
+                    },
+                    modal: true,
+                    resizable: false,
+                    closeOnEscape: true
+                });
+    };
+
+
+function buildFlashcard(flashcard){	
 	var root = $('<div class="flashcard-div"></div>');
 	var card = $('<div class="flashcard"></div>').appendTo(root);
 	var sidea = $('<div class="flashcard-a"></div>').text(flashcard.side_a).appendTo(card);
@@ -110,16 +142,8 @@ function buildFlashcard(flashcard){
 			e.preventDefault();
 			$(root).editFlashcard(flashcard);
 		})
-		$(remove).click(function(e){
-			e.preventDefault();
-			$.ajax({
-				url: '/api/flashcard/remove?id='+flashcard.id,
-				success: function(){
-					$(root).fadeOut().remove();
-				}
-			})
-		})
-		$(tools).hide().appendTo(this).fadeIn();
+		$("body").delegate("[data-confirm]", "click", confirmClickHandler);
+		$(tools).hide().appendTo(card).fadeIn();
 		
 	},function(){
 		$(this).removeClass('card-hovered');
