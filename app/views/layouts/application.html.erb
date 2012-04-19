@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ta2</title>
+  <title>Ta2</title>  
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
-
+  <link rel="shortcut icon" href="/favicon.ico"/>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= yield(:head)%>
@@ -14,29 +14,32 @@
 
 
 <div id="navigation">
-	<a href="/" id="logo-wrapper"><%= image_tag 'logo.png', :id => 'logo'%></a>
-	<ul id="nav-bar">
-		<li><%= link_to "Decks", decks_path%></li>
-		<% if current_user %>
-			<li><%= link_to 'New Deck', new_deck_path %></li>			
-		<% end %>
-	</ul>
-	<ul id="user-bar">
-		<% if current_user %>
-			<li><%= link_to current_user.name, edit_user_path(current_user)%></li>
-			<li><%= link_to "Log Out", logout_path%></li>
-		<% else %>
-			<li><%= link_to 'Sign Up', signup_path %></li>
-			<li><%= link_to "Log In", login_path%></li>
-		<% end %>
-	</ul>
+	<div id="nav-wrapper">	
+		<a href="/" id="logo-wrapper"><%= image_tag 'logo7.png', :id => 'logo'%></a>
+		<ul id="nav-bar">
+			<li><%= link_to "Decks", decks_path%></li>			
+		</ul>
+		<ul id="user-bar">
+			<% if current_user %>
+				<li><%= link_to current_user.name, edit_user_path(current_user)%></li>
+				<li><%= link_to "Log Out", logout_path%></li>
+			<% else %>
+				<li><%= link_to 'Sign Up', signup_path %></li>
+				<li><%= link_to "Log In", login_path%></li>
+			<% end %>
+		</ul>		
+	</div>
 </div>
 
+
 <div id="wrapper">
-	<div id="content">
-		<div id="header-title">
-			<%= yield :header_title%>
-		</div>
+	<div id="header-title">
+		<%= yield :header_title%>
+	</div>
+	<div id="toolbar">
+		<%= yield :toolbar%>
+	</div>
+	<div id="content">		
 		<%= yield %>
 	</div>
 	

@@ -91,6 +91,7 @@ class Deck < ActiveRecord::Base
       flashcard = self.states.where(:user_id => user_id).where(:value => 0)[-(i+1)].flashcard
       unless flashcard.nil?
         if i==r
+          @quiz[:question_id] = flashcard.id
           @quiz[:question] = flashcard.side_a
           @quiz[:answer] = flashcard.side_b
           @quiz[:correct_url] = "/create_state.json?flashcard_id=#{flashcard.id}&deck_id=#{self.id}&value=3"

@@ -141,50 +141,115 @@ class DecksController < ApplicationController
     end
   end
   
-  
-  def learnAPI
-    @deck = Deck.find(params[:deck_id])
-    last_state = @deck.states.where(:user_id => current_user.id).last
-    if last_state.nil?
-      logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 1"
-      @flashcard = @deck.full_draw(current_user.id)
-      render :full
-    elsif last_state.value == 0
-      last2_state = @deck.states.where(:user_id => current_user.id)[-2]
-      if last2_state.nil?
-        logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 2"
-        @flashcard = @deck.full_draw(current_user.id)
-        render :full
-      elsif last2_state.value == 0
-        last3_state = @deck.states.where(:user_id => current_user.id)[-3]
-        if last3_state.nil?
-          logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 3"
-          @flashcard = @deck.full_draw(current_user.id)
-          render :full
-        elsif last3_state.value == 0
-          logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% partialview"
-          @flashcards = @deck.partial_draw(current_user.id)
-          render :partial
+  class LearnHelper
+    attr_accessor :deck, :mode, :partial_flag, :quiz_count, :type, :front, :explored, :attachment
+    def fullView
+      candidates = @deck.flashcards.map{|x| x.id} - (@front + @explored)
+      if candidates.length==0
+        if @partial_flag == 0
+          self.partialView()
         else
-          logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 2"
-          @flashcard = @deck.full_draw(current_user.id)
-          render :full
+          self.quizView()
         end
       else
-        logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 3"
-        @flashcard = @deck.full_draw(current_user.id)
-        render :full
+        x = candidates[rand(candidates.length)]
+        @front.push(x)
+        @attachment[:flashcard] = Flashcard.find(x)
+        @type = 'full'               
       end
-    elsif last_state.value == 1 or last_state.value == 2
-      logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% quizview"
-      @quiz = @deck.quiz_draw(current_user.id)
-      render :quiz
-    elsif last_state.value == 3 or last_state.value == 4
-      logger.debug "%%%%%%%%%%%%%%%%%%%%%%%%% fullview 1"
-      @flashcard = @deck.full_draw(current_user.id) 
-      render :full
     end
     
+    def partialView
+      @attachment[:flashcards] = @front[0..2].map{|x| Flashcard.find(x)}
+      @type = 'partial'
+      @partial_flag = 1
+    end
+    
+    def quizView
+      @type = 'quiz'
+      @quiz = {}
+      @quiz_count += 1
+      ans = @front[0..2]
+      que = ans[rand(ans.length)]
+      while ans.length <3
+        candidates = @deck.flashcards.map{|x| x.id} - ans
+        ans = ans + [candidates[rand(candidates.length)]]
+      end
+      
+      @front = @front - [que]
+      @quiz[:question_id] = que
+      @quiz[:question] = Flashcard.find(que).side_a
+      @quiz[:answer] = Flashcard.find(que).side_b
+      @quiz[:correct_url] = "/create_state.json?flashcard_id=#{que}&deck_id=#{@deck.id}&value=3"
+      @quiz[:wrong_url] = "/create_state.json?flashcard_id=#{que}&deck_id=#{@deck.id}&value=4"
+      @quiz[:choices] = ans.map{|x| Flashcard.find(x).side_b}
+      @attachment[:quiz] = @quiz
+    end
+    
+    def quizOnlyHelp
+      candidates = @deck.flashcards.map{|x| x.id} - (@front + @explored)
+      unless candidates.length==0
+        x = candidates[rand(candidates.length)]
+        @front.push(x)
+      end
+    end
+    
+    def getData
+      @data = {}
+      @data[:type] = @type
+      @data[:front] = @front
+      @data[:explored] = @explored
+      @data[:partial_flag] = @partial_flag
+      @data[:quiz_count] = @quiz_count
+      @data[:attachment] = @attachment
+      @partial_flag = 0
+      return @data
+    end
+    
+  end
+  
+  def learnAPI
+    lh = LearnHelper.new
+    lh.deck = Deck.find(params[:deck_id])
+    lh.mode = params[:mode]
+    lh.partial_flag = params[:partial_flag].to_i
+    lh.quiz_count = params[:quiz_count].to_i
+    if params[:front].nil?
+      lh.front = []
+    else
+      lh.front = params[:front].map{|x| x.to_i}
+    end
+    if params[:explored].nil?
+      lh.explored = []
+    else
+      lh.explored = params[:explored].map{|x| x.to_i}
+    end
+    lh.type = 'error'
+    lh.attachment = {}
+    
+    
+    if lh.mode=='standard'
+      if (lh.front.length<3)
+        lh.fullView()      
+      else
+        if lh.quiz_count <2
+          if lh.partial_flag == 0
+            lh.partialView()
+          else
+            lh.quizView()
+          end
+        else
+          @quiz_count = 0
+          lh.fullView()
+        end
+      end
+    elsif lh.mode=='quiz_only'
+      lh.quizOnlyHelp()
+      lh.quizView()
+    end
+    respond_to do |format|
+      format.json {render :json => lh.getData().to_json}
+    end
   end
   
   

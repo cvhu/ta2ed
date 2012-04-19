@@ -8,6 +8,15 @@
 //= require jquery_ujs
 //= require_tree .
 
+$(document).ready(function(){
+	$('.edit-hint').hide();
+	$('.edit-button').hover(function(){
+		$(this).find('.edit-hint').fadeIn();
+	},function(){
+		$(this).find('.edit-hint').fadeOut()
+	})
+});
+
 
 jQuery.fn.loadFlashcardsForm = function(deck_id){
 	var root = this;
@@ -134,7 +143,7 @@ function buildFlashcard(flashcard){
 	$(root).hover(function(){
 		$(this).addClass('card-hovered');
 		var tools = $('<div class="deck-flashcard-tools"></div>');
-		var edit = $('<a href="#" class="deck-flashcard-edit"></a>').text('edit').appendTo(tools);
+		var edit = $('<a href="#" class="deck-flashcard-edit"></a>').html('<span class="icon edit-icon"></span><span class="edit-hint">edit</span>').appendTo(tools);
 		var remove = $('<a href="#" class="deck-flashcard-remove"></a>')
 			.attr('data-confirm', 'Are you sure you want to remove this card permanently?')
 			.text('remove').appendTo(tools);
@@ -178,3 +187,191 @@ jQuery.fn.prepopulateElement = function(defvalue) {
    	});
 	return selector;
 };
+
+
+jQuery.fn.loadLearnAPI = function(deck_id, mode, state){
+	var root = this;
+	var partial_flag = $('#quiz-info-partial-flag').val();
+	var quiz_count = $('#quiz-info-quiz-count').val();
+	var front = [];
+	$.each($('#quiz-info-front li'), function(i, v){
+		front.push($(v).text());
+	});
+	var explored = [];
+	$.each($('#quiz-info-explored li'), function(i, v){
+		explored.push($(v).text());
+	});
+	var data = {
+		deck_id: deck_id,
+		mode: mode,
+		state: state,
+		partial_flag: partial_flag,
+		quiz_count: quiz_count,
+		front: front,
+		explored: explored
+	}
+	
+	
+	if (explored.length == $('.quiz-progress-item').length){
+		$(root).loadQuizSummary();
+	}else{
+		$.ajax({
+			url:'/api/learn.json',//'?deck_id=8&state='+state+'&mode='+mode,
+			data: data,
+			beforeSend: function(){
+				$(root).html('<div class="loading">loading...</div>');
+			},
+			success: function(data){
+				$(root).text('');
+				$('#quiz-info-partial-flag').val(data.partial_flag);
+				$('#quiz-info-quiz-count').val(data.quiz_count);
+				var front = $('#quiz-info-front').empty();
+				$.each(data.front, function(i,v){
+					$('<li></li>').html(v).appendTo(front);
+				})
+				var explored = $('#quiz-info-explored').empty();
+				$.each(data.explored, function(i,v){
+					$('<li></li>').html(v).appendTo(explored);
+				})
+				$('.quiz-progress-item').removeClass('current');				
+				if (data.type=='quiz'){
+					$(root).loadQuizView(data.attachment.quiz);
+				}else if(data.type=='full'){
+					$(root).loadFullView(data.attachment.flashcard);
+				}else if(data.type=='partial'){
+					$(root).loadPartialView(data.attachment.flashcards);
+				}else{
+					$(root).html('<div id="message" class="error"> Error </div>');
+				}
+			}
+		})		
+	}
+
+}
+
+function buildLearnButton(){
+	var learn_button = $('<a href="#" id="next-button"></a>').text('next').click(function(e){
+		e.preventDefault();
+		$('#learn-wrapper').loadLearnAPI($('#quiz-info-deck-id').text(),$('#quiz-info-mode').text() , 'ongoing');
+	});
+	return learn_button;
+}
+
+jQuery.fn.loadQuizSummary = function(){
+	var root = this;
+	$('#quiz-progress').fadeOut();
+	$(root).empty();
+	var summary = $('<div id="quiz-summary"></div>').appendTo(root);
+	var title = $('<div id="quiz-summary-title"></div>').html('Summary').appendTo(summary);
+	$.each($('.quiz-progress-item'), function(i,v){
+		var item = $('<div class="quiz-summary-item"></div>').appendTo(summary);
+		var name = $('<div class="quiz-summary-item-name"></div>').appendTo(item).html($(v).attr('name'));
+		var right = $(v).find('.quiz-right').length;
+		var wrong = $(v).find('.quiz-wrong').length;
+		var score = $('<div class="quiz-summary-item-score"></div>').appendTo(item);
+		var rate = right*1.0/(right+wrong);
+		var right_width = $(score).width()*rate;
+		var wrong_width = $(score).width()*(1-rate);
+		$('<div class="quiz-summary-item-score-right quiz-right"></div>').css('width',right_width).appendTo(score);
+		$('<div class="quiz-summary-item-score-wrong quiz-wrong"></div>').css('width',wrong_width).appendTo(score);
+		$('<div class="quiz-summary-item-rate"></div>').html((rate*100).toFixed(2)+'%').appendTo(item);
+		
+	})
+	
+}
+
+jQuery.fn.loadQuizView = function(quiz){
+	var root = this;
+	pushHeaderMessage('QUIZ: Please Choose the Correct Answer', 'hint');
+	var qv = $('<div id="quiz-view" class="learn-view"></div>').appendTo(root);
+	var question = $('<div id="question"></div>').text(quiz.question).appendTo(qv);
+	var choices = $('<div id="choices"></div>').appendTo(qv);
+	$.each(quiz.choices, function(i, choice){
+		if (choice == quiz.answer){
+			var choice_button = $('<a class="choice answer"></a>').attr('href', quiz.correct_url).text(choice).appendTo(choices);
+		}else{
+			var choice_button = $('<a class="choice"></a>').attr('href', quiz.wrong_url).text(choice).appendTo(choices);
+		}
+	})		
+	var next_button = buildLearnButton();
+	$(next_button).hide().appendTo(qv);	
+	progress.updateItem(quiz.question_id, quiz.question, 'quiz');
+	$(".choice").click(function(e){
+		e.preventDefault();
+		$('#header-messages').children().slideUp();
+		$.ajax({
+			url: $(this).attr('href'),
+			success: function(){
+				$("#next-button").fadeIn();
+			}
+		})
+		$(".choice").removeAttr("href");
+		if (!$('#next-button').is(":visible")){
+			if ($(this).hasClass('answer')){
+				$(this).addClass('correct');
+				progress.updateItem(quiz.question_id, quiz.question, 'quiz-right');
+				var feedback = $('<div class="feedback-correct"></div>').text('correct!').appendTo($("#choices"));
+				$('#quiz-info-explored').append($('<li></li>').html(quiz.question_id));
+			}else{
+				progress.updateItem(quiz.question_id, quiz.question, 'quiz-wrong');
+				$(this).addClass('wrong');
+				$(".answer").addClass('correct');
+				var feedback = $('<div class="feedback-wrong"></div>').text('Did you forget this one?').appendTo($("#choices"));
+				$('#quiz-info-front').append($('<li></li>').html(quiz.question_id));
+			}		
+		}
+	})
+	
+}
+
+jQuery.fn.loadPartialView = function(flashcards){
+	var root = this;
+	var pv = $('<div id="partial-view" class="learn-view"></div>').appendTo(root);
+	$.each(flashcards, function(i, flashcard){
+		progress.updateItem(flashcard.id, flashcard.side_a, 'partial');
+		var flashcard_div = $('<div class="flashcard"></div>').appendTo(pv);
+		var side_a = $('<div class="flashcard-a"></div>').html(flashcard.side_a).appendTo(flashcard_div);
+		var remind_me = $('<a href="#" class="partial-remind"></a>').html('remind me').appendTo(flashcard_div).click(function(e){
+			e.preventDefault();
+			$(this).hide();
+			progress.updateItem(flashcard.id, 'partial-forgot');
+			var side_b = $('<div class="flashcard-b"></div>').html(flashcard.side_b).hide().appendTo(flashcard_div).fadeIn();
+		})
+	})
+	var next_button = buildLearnButton();
+	$(next_button).appendTo(pv);	
+	
+}
+
+jQuery.fn.loadFullView = function(flashcard){
+	var root = this;
+	var fv = $('<div id="full-view" class="learn-view"></div>').appendTo(root);
+	var flashcard_div = $('<div id="flashcard"></div>').appendTo(fv);
+	var side_a = $('<div id="flashcard-a"></div>').html(flashcard.side_a).appendTo(flashcard_div);
+	var side_b = $('<div id="flashcard-b"></div>').html(flashcard.side_b).appendTo(flashcard_div);
+	var next_button = buildLearnButton();
+	progress.updateItem(flashcard.id, flashcard.side_a, 'full');
+	$(next_button).appendTo(fv);
+	
+}
+
+function pushHeaderMessage(text, type){	
+ 	$("#header-messages").remove();
+	var messages = $('<div id="header-messages"></div>').appendTo('#content');
+	var new_message = $('<div class="messages"></div>').addClass(type).html(text).hide().appendTo(messages).fadeIn();
+	var exit = $('<a href="#" id="dismiss-messages-button" class="icon close-icon"></a>').appendTo(new_message).click(function(e){
+		e.preventDefault();
+		$(new_message).slideUp();
+	})	
+}
+
+function pushSlideMessage(text, type){	
+ 	$("#slide-messages").remove();
+	var messages = $('<div id="slide-messages"></div>').appendTo('body');
+	var new_message = $('<div class="messages"></div>').addClass(type).html(text).hide().appendTo(messages).fadeIn('slow').fadeOut('slow').fadeIn('slow');
+	var exit = $('<a href="#" id="dismiss-messages-button" class="icon close-icon"></a>').appendTo(new_message).click(function(e){
+		e.preventDefault();
+		$(new_message).slideUp();
+	})
+	
+}

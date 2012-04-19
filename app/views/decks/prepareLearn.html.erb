@@ -1,12 +1,61 @@
 <% content_for :head do%>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
-			$("#learn-begin-button").click(function(e){
-				e.preventDefault();
-				$("#learn-config").fadeOut().remove();
-				$("#learn-wrapper").loadLearnAPI();
+			var quiz_info = $('<div id="quiz-info" style="display:none;"></div>').appendTo('body');		
+			$("#learn-begin-button").hide();
+			$('#learn-terminate').hide();
+			$("input:radio[name='mode']").click(function(e){
+				var mode_value = $(this).val();
+				$('#learn-terminate').fadeIn();				
+				$("input:radio[name='terminate']").click(function(e){
+					$("#learn-begin-button").fadeIn();
+					$("#learn-begin-button").click(function(e){
+						e.preventDefault();						
+						var deck_id = $('<div id="quiz-info-deck-id"></div>').text(<%=@deck.id%>).appendTo(quiz_info);
+						var mode = $('<div id="quiz-info-mode"></div>').text(mode_value).appendTo(quiz_info);				
+						$("#learn-config").fadeOut().remove();
+						$("#learn-wrapper").loadLearnAPI($('#quiz-info-deck-id').text(),$('#quiz-info-mode').text() , 'begin');				
+					})				
+				})
+				
 			})
+			pushSlideMessage('Please Do Not Refresh the Page', 'warning');
+			progress.build(<%=@deck.flashcards.count%>);
+			var front = $('<ul id="quiz-info-front"></ul>').appendTo(quiz_info);
+			var explored = $('<ul id="quiz-info-explored"></ul>').appendTo(quiz_info);
+			var partial_flag = $('<input type="text" id="quiz-info-partial-flag"/>').val('0').appendTo(quiz_info);
+			var quiz_count = $('<input type="text" id="quiz-info-quiz-count"/>').val('0').appendTo(quiz_info);
 		})
+		
+		var progress = {
+			build: function(count){
+				var progress = $('<div id="quiz-progress"></div>').prependTo($('#content'));
+				var item_width = ($(progress).width() - 6*count)/count;
+				for(i=0; i<count;i++){
+					var item = $('<div class="quiz-progress-item quiz-progress-item-new"></div>').css('width', item_width).appendTo(progress);
+					var none = $('<div class="none"></div>').appendTo(item);
+					
+					$(item).hover(function(){						
+						var caption = $('<div class="progress-caption"></div>').appendTo(this);
+						$('<div class="progress-caption-title"></div>').appendTo(caption).html($(this).attr('name'));
+						$.each($(this).children().not('.progress-caption'), function(i,v){
+							$('<div class="progress-caption-history"></div>').appendTo(caption).html($(v).attr('class'));
+						})
+					}, function(){
+						$('.progress-caption').remove();
+					})
+				}
+			},
+			updateItem: function(card_id, name, state){
+				var item = $('.quiz-progress-item[card-id="'+card_id+'"]');
+				if ($(item).length == 0){
+					item = $('.quiz-progress-item-new').first();
+					$(item).attr('card-id', card_id).attr('name',name).removeClass('quiz-progress-item-new');				
+				}
+				$(item).addClass('current').children().hide();
+				$('<div></div>').addClass(state).appendTo(item);				
+			}
+		}
 	</script>
 <% end %>
 
@@ -20,7 +69,7 @@
 		<div id="learn-mode" class="learn-config-field">
 			<div class="learn-config-title"> Mode </div>
 			<input type="radio" name="mode" value="standard"/>Standard
-			<input type="radio" name="mode" value="quiz-only"/>Quiz Only
+			<input type="radio" name="mode" value="quiz_only"/>Quiz Only
 		</div>
 		<div id="learn-terminate" class="learn-config-field"> 
 			<div class="learn-config-title"> When to end? </div>
@@ -28,8 +77,7 @@
 				<input type="radio" name="terminate" value="progress"/> Till All Cards Learned 
 				<input type="radio" name="terminate" value="timer"/> Set Timer for<input type="text" size="5" id="learn-terminate-timer"/> Minutes
 			</div>
-		</div>
-	
-		<a href="#" id="learn-begin-button"> Begin! </a>
+		</div>		
 	</div>
+	<a href="#" id="learn-begin-button"> Begin </a>
 </div>

@@ -8,37 +8,31 @@
 				$(new_flashcard).loadFlashcardsForm(deck_id);
 			}
 			
+					
+			
 		});
 	</script>
 <% end %>
 
 <% content_for :header_title do%>
-	<%= @deck.title %>
+	<div class="edit-div"><div class="edit-object"><%= @deck.title %></div><a href="#" class="edit-button"><span class="icon edit-icon"></span><span class="edit-hint">edit</span></a></div>
 <% end %>
 
-<ul id="deck-toolbar">
+<% content_for :toolbar do%>
 	<% if current_user%>
 		<% if @deck.flashcards.count >= 3%>
-			<li>
-				<%= link_to 'learn', learn_deck_path(@deck) %>
-			</li>
-			
-			<li>
-				<%= link_to 'new learn', prepare_learn_deck_path(@deck) %>
-			</li>
+			<%= link_to 'Start Learning', prepare_learn_deck_path(@deck) %>
 		<% end %>
-		<li id="deck-edit">
-			<%= link_to 'edit', edit_deck_path(@deck) %>
-		</li>
-	<% end %>	
-</ul>
-
-
-<% if current_user==@deck.user%>
-	<div id="deck-flashcard-new"> 
-	</div>
+	<% end %>
 <% end %>
 
-<div id="deck-flashcards">
-	<div id="deck-id" style="display:none;"><%= @deck.id%></div>
+<div id="deck-profile">
+	<% if current_user==@deck.user%>
+		<div id="deck-flashcard-new"> 
+		</div>
+	<% end %>
+
+	<div id="deck-flashcards">
+		<div id="deck-id" style="display:none;"><%= @deck.id%></div>
+	</div>
 </div>
