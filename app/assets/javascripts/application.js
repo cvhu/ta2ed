@@ -144,12 +144,19 @@ function buildFlashcard(flashcard){
 		$(this).addClass('card-hovered');
 		var tools = $('<div class="deck-flashcard-tools"></div>');
 		var edit = $('<a href="#" class="deck-flashcard-edit"></a>').html('<span class="icon edit-icon"></span><span class="edit-hint">edit</span>').appendTo(tools);
-		var remove = $('<a href="#" class="deck-flashcard-remove"></a>')
-			.attr('data-confirm', 'Are you sure you want to remove this card permanently?')
-			.text('remove').appendTo(tools);
+		var remove = $('<a href="#" class="deck-flashcard-remove"></a>').text('remove').appendTo(tools);
 		$(edit).click(function(e){
 			e.preventDefault();
 			$(root).editFlashcard(flashcard);
+		})
+		$(remove).click(function(e){
+			e.preventDefault();
+			$.ajax({
+				url: '/api/flashcard/remove.json?id='+flashcard.id,
+				success: function(){
+					$(root).fadeOut();
+				}
+			})
 		})
 		$("body").delegate("[data-confirm]", "click", confirmClickHandler);
 		$(tools).hide().appendTo(card).fadeIn();
