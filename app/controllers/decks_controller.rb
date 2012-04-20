@@ -143,7 +143,7 @@ class DecksController < ApplicationController
   
   class LearnHelper
     attr_accessor :deck, :mode, :partial_flag, :quiz_count, :type, :front, :explored, :attachment
-    def fullView
+    def fullView      
       candidates = @deck.flashcards.map{|x| x.id} - (@front + @explored)
       if candidates.length==0
         if @partial_flag == 0
@@ -184,6 +184,9 @@ class DecksController < ApplicationController
       @quiz[:wrong_url] = "/create_state.json?flashcard_id=#{que}&deck_id=#{@deck.id}&value=4"
       @quiz[:choices] = ans.map{|x| Flashcard.find(x).side_b}
       @attachment[:quiz] = @quiz
+      if @quiz_count >=2
+        @partial_flag = 0
+      end
     end
     
     def quizOnlyHelp
@@ -239,7 +242,7 @@ class DecksController < ApplicationController
             lh.quizView()
           end
         else
-          @quiz_count = 0
+          lh.quiz_count = 0
           lh.fullView()
         end
       end

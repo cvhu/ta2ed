@@ -1026,3 +1026,45 @@ input[type=submit]:hover{
 	padding: 10px;
 	font-size: 150%;
 }
+
+#quiz-timer{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 150%;
+}
+
+.quiz-timer-field{
+	display: inline-block;
+	text-align: center;
+	padding: 10px;
+}
+
+.quiz-timer-subscript{
+	font-size: 60%;
+}
+
+.timer-urgent{
+	color: #ff0;
+	transition-property: color;
+	-o-transition-property: color;
+	-moz-transition-property: color;
+	-webkit-transition-property: color;
+	transition-duration: 1s;
+	-o-transition-duration: 1s;
+	-moz-transition-duration: 1s;
+	-webkit-transition-duration: 1s;
+}
+
+.timer-complete{
+	color: #da0;
+	transition-property: color;
+	-o-transition-property: color;
+	-moz-transition-property: color;
+	-webkit-transition-property: color;
+	transition-duration: 1s;
+	-o-transition-duration: 1s;
+	-moz-transition-duration: 1s;
+	-webkit-transition-duration: 1s;
+	
+}

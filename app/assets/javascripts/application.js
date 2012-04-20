@@ -212,7 +212,7 @@ jQuery.fn.loadLearnAPI = function(deck_id, mode, state){
 	}
 	
 	
-	if (explored.length == $('.quiz-progress-item').length){
+	if ((explored.length == $('.quiz-progress-item').length)||($('.timer-complete').length>0)){
 		$(root).loadQuizSummary();
 	}else{
 		$.ajax({

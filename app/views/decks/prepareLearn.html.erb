@@ -9,13 +9,21 @@
 				$('#learn-terminate').fadeIn();				
 				$("input:radio[name='terminate']").click(function(e){
 					$("#learn-begin-button").fadeIn();
+					if ($(this).val()=='timer'){
+						timer.build();
+						$('#learn-terminate-timer').blur(function(){
+							timer.update($(this).val());
+						})
+					}
 					$("#learn-begin-button").click(function(e){
-						e.preventDefault();						
+						e.preventDefault();
+						timer.begin();			
 						var deck_id = $('<div id="quiz-info-deck-id"></div>').text(<%=@deck.id%>).appendTo(quiz_info);
 						var mode = $('<div id="quiz-info-mode"></div>').text(mode_value).appendTo(quiz_info);				
 						$("#learn-config").fadeOut().remove();
 						$("#learn-wrapper").loadLearnAPI($('#quiz-info-deck-id').text(),$('#quiz-info-mode').text() , 'begin');				
-					})				
+					})
+					
 				})
 				
 			})
@@ -26,6 +34,42 @@
 			var partial_flag = $('<input type="text" id="quiz-info-partial-flag"/>').val('0').appendTo(quiz_info);
 			var quiz_count = $('<input type="text" id="quiz-info-quiz-count"/>').val('0').appendTo(quiz_info);
 		})
+		
+		var timer = {
+			div: $('<div id="quiz-timer"></div>'),
+			min: $('<div id="quiz-timer-min" class="quiz-timer-field"></div>').append($('<div id="quiz-timer-min-value"></div>').text('0')).append($('<div id="quiz-timer-min-subscript" class="quiz-timer-subscript"></div>').text('min')),
+			sec: $('<div id="quiz-timer-sec" class="quiz-timer-field"></div>').append($('<div id="quiz-timer-sec-value"></div>').text('0')).append($('<div id="quiz-timer-sec-subscript" class="quiz-timer-subscript"></div>').text('sec')),
+			build: function(){
+				var timer = $(this.div).prependTo($('#content')).append(this.min).append(this.sec);						
+			},
+			update: function(min){
+				$(this.min).find('#quiz-timer-min-value').text(min);
+			},
+			begin: function(){
+				var tid = setInterval(secDown,1000);
+				var timer = this;
+				function secDown(){
+					var min_val = parseInt($('#quiz-timer-min-value').text());
+					var sec_val = parseInt($('#quiz-timer-sec-value').text());
+					if (sec_val == 0){
+						if (min_val > 0){
+							min_val = min_val -1;
+							sec_val = 59;							
+						}else{
+							clearInterval(tid);
+							$(timer.div).removeClass('timer-urgent').addClass('timer-complete');
+						}
+					}else{						
+						sec_val = sec_val - 1
+					}					
+					if (min_val == 0){
+						$(timer.div).addClass('timer-urgent');
+					}
+					$('#quiz-timer-min-value').text(min_val); 
+					$('#quiz-timer-sec-value').text(sec_val); 
+				}
+			}
+		}
 		
 		var progress = {
 			build: function(count){
