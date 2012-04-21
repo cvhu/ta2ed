@@ -32,7 +32,6 @@ body {
 	height: 40px;
 	width: 800px;
 	margin: 0px auto;
-	padding: 3px 0 0 0;
 	position: relative;
 }
 
@@ -105,21 +104,20 @@ body {
 /*== Toolbar ==*/
 
 #toolbar{
-	margin: 45px 0 0 15px;
+	margin: 15px;
 	padding: 10px;
 	text-align: center;
 }
 
-#toolbar a {
+#toolbar a{
 	text-align: center;
 	display: inline-block;
 	border: 1px solid #ccc;
-	padding: 10px 15px;
+	padding: 5px 10px;
 	border-radius: 5px;	
-	background: green;
-	box-shadow: 1px 1px 3px #aaa;
+	background: #ccc;
+	box-shadow: 1px 1px 5px #aaa;
 	color: #fff;
-	font-size: 1.2em;
 	margin: 5px;
 	transition-property: background;
 	-o-transition-property: background;
@@ -183,12 +181,6 @@ a{
 .prepopulate{
 	color: #999;
 	background: #eee;
-	
-	border-radius: 5px;
-	padding: 7px;
-	width: 275px;
-	margin: 0;
-	font-size: 150%;
 }
 
 
@@ -207,6 +199,7 @@ a{
 }
 
 .deck{
+	box-shadow: 1px 1px 5px #ccc;
 	vertical-align: top;
 	display: inline-block;
 	border: 1px solid #ccc;
@@ -215,14 +208,6 @@ a{
 	border-radius: 5px;
 	width: 340px;
 	background-image: url('textures/light_wool.png');
-	
-	box-shadow: 2px -2px 0px #ddd,
-				2px -2px 1px #222,
-				8px -6px 0px #ddd,
-				8px -6px 1px #222,
-				12px -10px 0px #ddd,
-				12px -10px 1px #222;
-	
 	transition-property: box-shadow;
 	-o-transition-property: box-shadow;
 	-moz-transition-property: box-shadow;
@@ -398,11 +383,11 @@ a{
 	font-size: 50%;
 }
 
-#form-flashcard-a {
+#form-flashcard-a{
 	border-radius: 5px 5px 0px 0px;
 	display: block;
 	padding: 10px;
-	width: 275px;
+/*	width: 475px;*/
 	margin: 0px;
 	font-size: 200%;
 }
@@ -410,10 +395,11 @@ a{
 #form-flashcard-b{
 	margin: 0px;
 	border-radius: 0px 0px 5px 5px;
-	width: 275px;
+/*	width: 475px;*/
 	display: block;
 	padding: 10px;	
 	font-size: 110%;
+	width: 80%;
 	
 }
 
@@ -514,50 +500,23 @@ label{
 	font-size: 80%;
 }
 
-input {
+input{
 	padding: 3px;
 	font-size: 120%;
 	border: 1px solid #aaa;
 }
 
 input[type=submit]{
-	text-align: center;
-	display: inline-block;
-	border: 1px solid #ccc;
-	padding: 10px 15px;
-	border-radius: 5px;	
-	background: #aaa;
-	box-shadow: 1px 1px 3px #aaa;
-	color: #fff;
-	font-size: 1.2em;
+	color: white;
 	margin: 5px;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
+	cursor: pointer;
+	background: #333;
 }
 
 input[type=submit]:hover{
-	background: #0d5;
-	border: 1px solid #aaa;
-	box-shadow: 1px 1px 2px #fff;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
+	background: #000;
 }
 
-#form-flashcard-submit {
-	margin: 10px 0 0 0;
-}
 
 /* Quiz-view*/
 #quiz-view{
@@ -916,16 +875,14 @@ input[type=submit]:hover{
 	width: 30px;
 	font-size: 50%;
 	color: #aaa;
-	
-	margin-left: 0.5em;
 	transition-property: color;
 	-o-transition-property: color;
 	-moz-transition-property: color;
 	-webkit-transition-property: color;
-	transition-duration: 0.3s;
-	-o-transition-duration: 0.3s;
-	-moz-transition-duration: 0.3s;
-	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
 	
 }
 
@@ -1088,7 +1045,7 @@ input[type=submit]:hover{
 }
 
 .timer-urgent{
-	color: #ff0;
+	color: #da0;
 	transition-property: color;
 	-o-transition-property: color;
 	-moz-transition-property: color;
@@ -1100,7 +1057,7 @@ input[type=submit]:hover{
 }
 
 .timer-complete{
-	color: #da0;
+	color: #f00;
 	transition-property: color;
 	-o-transition-property: color;
 	-moz-transition-property: color;

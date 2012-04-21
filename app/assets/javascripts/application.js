@@ -140,31 +140,33 @@ function buildFlashcard(flashcard){
 	var sidea = $('<div class="flashcard-a"></div>').text(flashcard.side_a).appendTo(card);
 	var sideb = $('<div class="flashcard-b"></div>').text(flashcard.side_b).appendTo(card);
 	var stats = $('<div class="deck-flashcard-stats"></div>').appendTo(root);
-	$(root).hover(function(){
-		$(this).addClass('card-hovered');
-		var tools = $('<div class="deck-flashcard-tools"></div>');
-		var edit = $('<a href="#" class="deck-flashcard-edit"></a>').html('<span class="icon edit-icon"></span><span class="edit-hint">edit</span>').appendTo(tools);
-		var remove = $('<a href="#" class="deck-flashcard-remove"></a>').text('remove').appendTo(tools);
-		$(edit).click(function(e){
-			e.preventDefault();
-			$(root).editFlashcard(flashcard);
-		})
-		$(remove).click(function(e){
-			e.preventDefault();
-			$.ajax({
-				url: '/api/flashcard/remove.json?id='+flashcard.id,
-				success: function(){
-					$(root).fadeOut();
-				}
+	if ($('#deck-flashcard-new').length>0){
+		$(root).hover(function(){
+			$(this).addClass('card-hovered');		
+			var tools = $('<div class="deck-flashcard-tools"></div>');
+			var edit = $('<a href="#" class="deck-flashcard-edit"></a>').html('<span class="icon edit-icon"></span><span class="edit-hint">edit</span>').appendTo(tools);
+			var remove = $('<a href="#" class="deck-flashcard-remove"></a>').text('remove').appendTo(tools);
+			$(edit).click(function(e){
+				e.preventDefault();
+				$(root).editFlashcard(flashcard);
 			})
-		})
-		$("body").delegate("[data-confirm]", "click", confirmClickHandler);
-		$(tools).hide().appendTo(card).fadeIn();
-		
-	},function(){
-		$(this).removeClass('card-hovered');
-		$(this).find('.deck-flashcard-tools').fadeOut().remove();
-	})
+			$(remove).click(function(e){
+				e.preventDefault();
+				$.ajax({
+					url: '/api/flashcard/remove.json?id='+flashcard.id,
+					success: function(){
+						$(root).fadeOut();
+					}
+				})
+			})
+			$("body").delegate("[data-confirm]", "click", confirmClickHandler);
+			$(tools).hide().appendTo(card).fadeIn();
+
+		},function(){
+			$(this).removeClass('card-hovered');
+			$(this).find('.deck-flashcard-tools').fadeOut().remove();
+		})		
+	}
 	return root;
 }
 
