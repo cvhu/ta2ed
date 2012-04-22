@@ -2,11 +2,15 @@ class DecksController < ApplicationController
   # GET /decks
   # GET /decks.json
   def index
-    @decks = Deck.all
+    if current_user
+      @decks = Deck.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @decks }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @decks }
+      end
+    else
+      redirect_to :signup
     end
   end
 

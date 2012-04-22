@@ -211,17 +211,18 @@ a{
 	display: inline-block;
 	border: 1px solid #ccc;
 	padding: 10px;
-	margin: 5px;
+	margin: 10px;
 	border-radius: 5px;
-	width: 340px;
+	width: 330px;
 	background-image: url('textures/light_wool.png');
 	
-	box-shadow: 2px -2px 0px #ddd,
-				2px -2px 1px #222,
-				8px -6px 0px #ddd,
-				8px -6px 1px #222,
-				12px -10px 0px #ddd,
-				12px -10px 1px #222;
+	box-shadow: 1px -1px 3px #777,
+				3px -3px 1px #fff,
+				5px -5px 3px #777,
+				7px -7px 1px #fff,
+				9px -9px 3px #777,
+				11px -11px 1px #fff,
+				13px -13px 3px #777;
 	
 	transition-property: box-shadow;
 	-o-transition-property: box-shadow;
@@ -1110,4 +1111,44 @@ input[type=submit]:hover{
 	-moz-transition-duration: 1s;
 	-webkit-transition-duration: 1s;
 	
+}
+
+/*= Landing Page =*/
+#landing-left{
+	display: inline-block;
+	width: 350px;
+}
+
+#logo-image img{
+	width: 350px;
+}
+
+#landing-right{	
+	vertical-align: top;
+	display: inline-block;
+	width: 400px;
+}
+
+#slogan-div{
+	position: relative;
+	font-size: 200%;
+	line-height: 50px;
+	margin-top: 100px;	
+	color: #777;
+}
+
+#tatwo{
+	color: #000;
+	text-shadow: 1px 1px 3px #fff,
+				-1px -1px 1px #777;
+}
+
+#sign-up-div{
+	box-shadow: 0px 0px 30px #777;
+	border-radius: 15px;
+	padding: 10px;
+	margin: 15px auto;
+	background: #eee;
+	width: 350px;
+	border: 2px solid #aaa;
 }
