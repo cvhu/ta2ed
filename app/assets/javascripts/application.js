@@ -384,3 +384,26 @@ function pushSlideMessage(text, type){
 	})
 	
 }
+
+
+jQuery.fn.prepopulateDefault = function(){
+	var root = this;
+	$(root).find('input').focus(function(){
+		$(root).addClass('prepopulated-field-focus');
+	})
+	
+	$(root).find('input').blur(function(){
+		$(root).removeClass('prepopulated-field-focus');
+		if ($(this).val()==''){
+			$(root).find('label').fadeIn();
+		}
+	})
+	
+	$(root).find('input').keyup(function(){
+		if ($(this).val()==''){
+			$(root).find('label').fadeIn();
+		}else{
+			$(root).find('label').hide();	
+		}				
+	})			
+}

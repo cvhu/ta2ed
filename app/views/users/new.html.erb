@@ -2,24 +2,33 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('#navigation').remove();
-			$('#landing-left').hide().delay(500).fadeIn()
-			$('#landing-right').hide().delay(1000).fadeIn();
+			$('#landing-left').hide().delay(500).fadeIn();
+			$('#sub-logo').hide().delay(1000).fadeIn();
+			$('#landing-right').hide().delay(1500).fadeIn();
 			// $('#slogan-div').delay(3000).animate({top:"+=100px"},1000);
 			$('#sign-up-div').hide().delay(3500).slideDown(1000);
+			
+			$.each($('.prepopulated-field'), function(i,v){
+				$(v).prepopulateDefault();
+			})
+			
 		})
+		
 	</script>
 <%end%>
 
 
 <div id="landing-left">
 	<div id="logo-image">
-		<%= image_tag 'logo.png'%>
+		<%= image_tag 'logo.png'%>		
 	</div>
+	<%= image_tag 'slogan.png', :id => 'sub-logo'%>
 </div>
 <div id="landing-right">
+	<div id="log-in-hint">
+		Already a member? <%= link_to 'log in', login_path, :id => 'log-in-button'%>
+	</div>
 	<div id="sign-up-div">
-		<h1>Sign Up</h1>
-
 		<%= form_for @user do |f| %>
 		  <% if @user.errors.any? %>
 		    <div class="error_messages">
@@ -31,28 +40,27 @@
 		      </ul>
 		    </div>
 		  <% end %>
-		  <div class="field">
+		  <div class="prepopulated-field">
 		    <%= f.label :name %>
 		    <%= f.text_field :name %>
 		  </div>
 
-		  <div class="field">
+		  <div class="prepopulated-field">
 		    <%= f.label :email %>
 		    <%= f.text_field :email %>
 		  </div>
-		  <div class="field">
+		  <div class="prepopulated-field">
 		    <%= f.label :password %>
 		    <%= f.password_field :password %>
 		  </div>
-		  <div class="field">
+		  <div class="prepopulated-field">
 		    <%= f.label :password_confirmation %>
 		    <%= f.password_field :password_confirmation %>
 		  </div>
-		  <div class="actions"><%= f.submit %></div>
-		<% end %>
-		or <%= link_to 'log in', login_path%>
+		<%= f.submit 'Sign Up', :id =>"sign-up-button"%>
+		<% end %>		
 	</div>
 	<div id="slogan-div">
-		Need to memorize something? <br/> We will <span id="tatwo">"tatwo"</span> it for you.
+		Need to memorize something? <br/> We will <span id="tatwo">"ta-two"</span> it for you.
 	</div>
 </div>

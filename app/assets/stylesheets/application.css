@@ -1130,17 +1130,19 @@ input[type=submit]:hover{
 }
 
 #slogan-div{
+	font-weight: bold;
 	position: relative;
-	font-size: 200%;
+	font-size: 180%;
 	line-height: 50px;
-	margin-top: 100px;	
+	margin-top: 50px;	
 	color: #777;
+	text-shadow: 1px 1px 3px #fff,
+				-1px -1px 1px #777;
+	
 }
 
 #tatwo{
 	color: #000;
-	text-shadow: 1px 1px 3px #fff,
-				-1px -1px 1px #777;
 }
 
 #sign-up-div{
@@ -1149,6 +1151,154 @@ input[type=submit]:hover{
 	padding: 10px;
 	margin: 15px auto;
 	background: #eee;
-	width: 350px;
+	width: 300px;
 	border: 2px solid #aaa;
+}
+
+#sub-logo{
+	opacity: 0.5;
+	text-shadow: 0px 0px 5px #aaa;
+	display: block;
+	position: relative;
+	width: 250px;	
+	margin: 0px auto;
+/*	top: -100px;*/
+}
+
+
+/*= Prepopulated-Field*/
+.prepopulated-field{
+	height: 30px;
+	position: relative;
+	margin: 5px auto;
+	padding: 10px 0px;
+	width: 90%;
+	font-size: 150%;
+}
+
+.prepopulated-field label{
+	height: 30px;
+	position: absolute;
+	width: 100%;
+	margin: 15px 5px;
+	color: #bbb;
+}
+
+.prepopulated-field-focus label{
+	color: #ddd;
+	transition-property: color;
+	-moz-transition-property: color;
+	-o-transition-property: color;
+	-webkit-transition-property: color;
+	transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	
+}
+
+.prepopulated-field-focus input{
+	box-shadow: 0px 0px 5px #aaa;
+}
+
+.prepopulated-field input{
+	height: 30px;
+	width: 100%;
+	border-radius: 5px;
+}
+
+#sign-up-button{
+	display: block;
+	width: 80%;
+	margin: 15px auto;
+}
+
+#log-in-button{
+	display: inline-block;
+	color: #fff;
+	background: #0ad;
+	padding: 3px 10px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px #aaa;
+}
+
+
+#log-in-button:hover{
+	background: #07a;
+	transition-property: background;
+	-o-transition-property: background;
+	-moz-transition-property: background;
+	-webkit-transition-property: background;
+	transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+}
+
+#log-in-submit{
+	height: 30px;
+	width: 80%;
+	margin: 10px auto;
+	display: block;
+	color: #fff;
+	background: #0ad;
+	padding: 5px 10px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px #aaa;
+}
+
+#log-in-submit:hover{
+	background: #07a;
+	transition-property: background;
+	-o-transition-property: background;
+	-moz-transition-property: background;
+	-webkit-transition-property: background;
+	transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+}
+
+#log-in-hint{
+	text-shadow: 1px 1px 1px #fff,
+				 -1px -1px 1px #777;
+	text-align: right;
+}
+
+#log-in-div{
+	margin: 15px auto;
+	width: 300px;
+	padding: 15px;
+	box-shadow: 0px 0px 10px #aaa;
+	background: #eee;
+	border-radius: 10px;
+}
+
+.deck{
+	position: relative;
+}
+
+.deck-actions{
+	position: absolute;
+	bottom: 10px;
+	right: 20px;
+}
+
+.deck-actions a{
+	display: inline-block;
+	margin: 2px 5px;
+	color: #777;
+}
+
+.deck-actions a:hover{
+	text-shadow: 1px 1px 1px #aaa;
+	color: #000;
+	transition-property: color;
+	-o-transition-property: color;
+	-moz-transition-property: color;
+	-webkit-transition-property: color;
+	transition-duration: 0.5s;	
+	-o-transition-duration: 0.5s;	
+	-moz-transition-duration: 0.5s;	
+	-webkit-transition-duration: 0.5s;	
 }

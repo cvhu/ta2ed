@@ -1,3 +1,20 @@
+<%content_for :head do%>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.each($('.deck'), function(i,v){
+				$(v).find('.deck-actions').hide();
+				$(v).hover(function(){
+					$(this).find('.deck-actions').fadeIn();
+				}, 	function(){
+					$(this).find('.deck-actions').fadeOut();
+				})
+			})
+		})
+		
+	</script>
+<%end%>
+
+
 <% content_for :header_title do%>
 	Decks
 <% end %>
@@ -9,20 +26,20 @@
 <% end %>
 <div id="decks">
 	<% @decks.each do |deck| %>
-		<div class="deck">
-			
-		    
+		<div class="deck">		    
 			<div class="deck-details">
 				<div class="deck-count"><%=deck.flashcards.count %><div class="subscript"> cards</div></div>
 			</div>
-			<div class="deck-title"><%=link_to deck.title, deck_path(deck) %></div>
+			<div class="deck-title"><%=deck.title%></div>
 			<% unless deck.user.nil?%>
 				<div class="deck-creator"><%= "by #{deck.user.name}"%></div>
 			<% else %>
 				<div class="deck-creator"><%= "by anonymous"%></div>
 			<% end %>
-			
-			
-		</div>				
+			<div class='deck-actions'>
+				<%= link_to 'view', deck_path(deck)%>
+				<%= link_to 'learn', prepare_learn_deck_path(deck)%>
+			</div>
+		</div>
 	<% end %>
 </div>

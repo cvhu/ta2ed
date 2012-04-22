@@ -1,13 +1,26 @@
-<h1>Log in</h1>
+<%content_for :head do%>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// $('#navigation').remove();
+			$.each($('.prepopulated-field'), function(i,v){
+				$(v).prepopulateDefault();
+			})
+			
+		})
 
-<%= form_tag sessions_path do %>
-  <div class="field">
-    <%= label_tag :email %>
-    <%= text_field_tag :email, params[:email] %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="actions"><%= submit_tag "Log in" %></div>
-<% end %>
+	</script>
+<%end%>
+
+<div id="log-in-div">
+	<%= form_tag sessions_path do %>
+	  <div class="prepopulated-field">
+	    <%= label_tag :email %>
+	    <%= text_field_tag :email, params[:email] %>
+	  </div>
+	  <div class="prepopulated-field">
+	    <%= label_tag :password %>
+	    <%= password_field_tag :password %>
+	  </div>
+	  <%= submit_tag "Log in", :id=> 'log-in-submit' %>
+	<% end %>
+</div>
