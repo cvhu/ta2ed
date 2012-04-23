@@ -10,7 +10,9 @@
       </ul>
     </div>
   <% end %>
-
-  <%= f.text_field :title %>
-  <%= f.submit %>
+  <div class="prepopulated-field">
+	<%= f.label :title %>
+  	<%= f.text_field :title %>
+<%= f.submit %>
+  </div>  
 <% end %>

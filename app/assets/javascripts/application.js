@@ -9,13 +9,56 @@
 //= require_tree .
 
 $(document).ready(function(){
-	$('.edit-hint').hide();
-	$('.edit-button').hover(function(){
+});
+
+jQuery.fn.inLineTextEdit = function(url){
+	var div = this;
+	$(div).find('.edit-hint').hide();
+	$(div).find('.edit-button').hover(function(){
 		$(this).find('.edit-hint').fadeIn();
 	},function(){
 		$(this).find('.edit-hint').fadeOut()
 	})
-});
+	
+	var edit = $(div).find('.edit-button');
+	var actions = $('<div class="edit-actions"></div>').hide().appendTo(div);
+	var save = $('<a href="#" class="edit-save"></a>').html('save').appendTo(actions);	
+	var cancel = $('<a href="#" class="edit-cancel"></a>').html('cancel').appendTo(actions);
+	var object = $(div).find('.edit-object');
+	var content = $(object).html();
+	
+	$(save).click(function(){
+		content = $(object).find('input').val();
+		
+		$.ajax({
+			url: url+content,
+			beforeSend: function(){
+				$(object).html('loading...');
+			},
+			success: function(data){
+				$(object).empty().html(data.title);				
+			}
+		})
+		$(actions).hide();
+		$(edit).show();
+		
+	})
+	
+	$(cancel).click(function(){
+		$(object).empty().html(content);
+		$(actions).hide();
+		$(edit).show();
+	})
+	
+	
+	$(edit).click(function(){
+		$(this).hide();
+		$(actions).show();
+		$(object).empty();
+		$('<input type="text"/>').val(content).appendTo(object);		
+	})
+	
+}
 
 
 jQuery.fn.loadFlashcardsForm = function(deck_id){
@@ -39,6 +82,9 @@ jQuery.fn.loadFlashcardsForm = function(deck_id){
 			success: function(data){
 				$(root).text('').removeClass('loading').loadFlashcardsForm(deck_id);				
 				$("#deck-flashcards").prepend(buildFlashcard(data));
+				if ($('.flashcard').length >3){
+					$('#start-learning-button').fadeIn();
+				}
 			}
 		})
 		
@@ -55,6 +101,9 @@ jQuery.fn.loadFlashcards = function(deck_id){
 		},
 		success: function(data){
 			$(root).text('').removeClass('loading');
+			if (data.length <3){
+				$('#start-learning-button').hide();
+			}
 			if (data.length==0){
 				var deck_empty = $("<div id='deck-empty'></div>").text("empty deck").appendTo(root);
 			}else{
@@ -155,7 +204,11 @@ function buildFlashcard(flashcard){
 				$.ajax({
 					url: '/api/flashcard/remove.json?id='+flashcard.id,
 					success: function(){
-						$(root).fadeOut();
+						$(root).fadeOut().remove();
+						if ($('.flashcard').length <3){
+							$('#start-learning-button').fadeOut();
+						}
+						
 					}
 				})
 			})

@@ -10,18 +10,19 @@ Ta2ed::Application.routes.draw do
   
   get "learn_deck/:id" => "decks#learn", :as => "learn_deck"
   get "/learn_deck/:id/prepare" => "decks#prepareLearn", :as => "prepare_learn_deck"
-  
-  
+
   # JSON requests
   get "/api/flashcards" => "decks#getFlashcards"
   get "/api/flashcard/create" => "flashcards#postFlashcard"
   get "/api/flashcard/edit" => "flashcards#editFlashcard"
   get "/api/flashcard/remove" => "flashcards#removeFlashcard"
   
+  get "/api/deck/edit" => "decks#editDeck"
+  
   get "/api/learn" => "decks#learnAPI"
   
   get "/create_state" => "decks#createState"
-  
+  get "/create_new_deck" => "decks#createUntitled", :as => "create_new_deck"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

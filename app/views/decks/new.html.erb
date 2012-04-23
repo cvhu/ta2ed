@@ -1,7 +1,11 @@
 <% content_for :head do %>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
-			$("#deck_title").prepopulateElement('deck title');
+			// $("#deck_title").prepopulateElement('deck title');
+			$.each($('.prepopulated-field'), function(i,v){
+				$(v).prepopulateDefault();
+			})
+			
 		})
 	</script>
 <% end %>

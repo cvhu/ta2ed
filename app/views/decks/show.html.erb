@@ -11,7 +11,7 @@
 				$('.edit-button').hide();
 			}
 			
-					
+			$('.edit-div').inLineTextEdit('/api/deck/edit.json?id='+deck_id+'&title=');
 			
 		});
 	</script>
@@ -19,9 +19,7 @@
 
 <% content_for :header_title do%>
 	<div class="edit-div">	
-		<div class="edit-object"
-			><%= @deck.title %>
-		</div>
+		<div class="edit-object"><%= @deck.title %></div>
 		<a href="#" class="edit-button">
 			<span class="icon edit-icon"></span><span class="edit-hint">edit</span>
 		</a>
@@ -30,9 +28,7 @@
 
 <% content_for :toolbar do%>
 	<% if current_user%>
-		<% if @deck.flashcards.count >= 3%>
-			<%= link_to 'Start Learning', prepare_learn_deck_path(@deck) %>
-		<% end %>
+		<%= link_to 'Start Learning', prepare_learn_deck_path(@deck), :id => 'start-learning-button'%>
 	<% end %>
 <% end %>
 

@@ -56,6 +56,23 @@ class DecksController < ApplicationController
       end
     end
   end
+  
+  
+  def createUntitled
+    @deck = Deck.new(params[:deck])
+    @deck.title = 'untitled'
+    @deck.user = current_user
+    respond_to do |format|
+      if @deck.save
+        format.html { redirect_to @deck, notice: 'Deck was successfully created.' }
+        format.json { render json: @deck, status: :created, location: @deck }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @deck.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 
   # PUT /decks/1
   # PUT /decks/1.json
@@ -137,6 +154,19 @@ class DecksController < ApplicationController
       
   
   # ==============================   JSON Requests ==============================
+  
+  def editDeck
+    @deck = Deck.find(params[:id])
+    @deck.title = params[:title]    
+    respond_to do |format|
+      if @deck.save
+        format.json {render :json => @deck.to_json}
+      else
+        format.json {render :json => {:deck => {:title => 'error'}}.to_json}
+      end
+    end
+  end
+  
   def getFlashcards
     @deck = Deck.find(params[:deck_id])
     @flashcards = @deck.flashcards.order("created_at DESC")
