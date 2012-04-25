@@ -64,29 +64,45 @@ jQuery.fn.inLineTextEdit = function(url){
 jQuery.fn.loadFlashcardsForm = function(deck_id){
 	var root = this;
 	var flashcard = $('<div class="flashcard"></div>').appendTo(root);
-	var sidea_field = $('<input type="text" id="form-flashcard-a"/>').appendTo(flashcard).focus().prepopulateElement('front');
-	var sideb_field = $('<textarea type="text" id="form-flashcard-b"/>').appendTo(flashcard).prepopulateElement('back');	
+	var sidea_field = $('<input type="text" id="form-flashcard-a"/>').appendTo(flashcard).focus().prepopulateElement('Name');
+	var sideb_field = $('<textarea type="text" id="form-flashcard-b"/>').appendTo(flashcard).prepopulateElement('Description');	
 	var submit = $('<input type="submit" id="form-flashcard-submit" value="new card"/>').appendTo(flashcard).click(function(e){
-		var json = {
-			deck_id: deck_id,
-			side_a: $(sidea_field).val(),
-			side_b: $(sideb_field).val()
-		};
 		e.preventDefault();
-		$.ajax({
-			url: '/api/flashcard/create.json',
-			data: json,
-			beforeSend: function(){
-				$(root).text('loading...').addClass('loading');
-			},
-			success: function(data){
-				$(root).text('').removeClass('loading').loadFlashcardsForm(deck_id);				
-				$("#deck-flashcards").prepend(buildFlashcard(data));
-				if ($('.flashcard').length >3){
-					$('#start-learning-button').fadeIn();
-				}
+		var sidea_flag = 0;
+		var sideb_flag = 0;
+		$.each($('.flashcard'), function(i,f){
+			if ($(f).find('.flashcard-a').text()==$(sidea_field).val()){
+				sidea_flag = 1;
 			}
+			if ($(f).find('.flashcard-b').text()==$(sideb_field).val()){
+				sideb_flag = 1;
+			}
+			
 		})
+		if (sidea_flag+sideb_flag > 0){
+			pushHeaderMessage('Card already exists', 'warning');			
+		}else{
+			dismissHeaderMessage();
+			var json = {
+				deck_id: deck_id,
+				side_a: $(sidea_field).val(),
+				side_b: $(sideb_field).val()
+			};			
+			$.ajax({
+				url: '/api/flashcard/create.json',
+				data: json,
+				beforeSend: function(){
+					$(root).text('loading...').addClass('loading');
+				},
+				success: function(data){
+					$(root).text('').removeClass('loading').loadFlashcardsForm(deck_id);				
+					$("#deck-flashcards").prepend(buildFlashcard(data));
+					if ($('.flashcard').length >3){
+						$('#start-learning-button').fadeIn();
+					}
+				}
+			})			
+		}
 		
 	});
 }
@@ -419,12 +435,16 @@ jQuery.fn.loadFullView = function(flashcard){
 
 function pushHeaderMessage(text, type){	
  	$("#header-messages").remove();
-	var messages = $('<div id="header-messages"></div>').appendTo('#content');
+	var messages = $('<div id="header-messages"></div>').prependTo('#content');
 	var new_message = $('<div class="messages"></div>').addClass(type).html(text).hide().appendTo(messages).fadeIn();
 	var exit = $('<a href="#" id="dismiss-messages-button" class="icon close-icon"></a>').appendTo(new_message).click(function(e){
 		e.preventDefault();
 		$(new_message).slideUp();
 	})	
+}
+
+function dismissHeaderMessage(){
+	$('#header-messages').remove();
 }
 
 function pushSlideMessage(text, type){	
