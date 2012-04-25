@@ -335,6 +335,27 @@ a{
 	display: inline-block;
 }
 
+.deck-flashcard-tools>a{
+	display: inline-block;
+	vertical-align: top;
+	padding: 2px;
+}
+
+.deck-flashcard-remove-confirm>a{
+	color: #aaa;
+	display: inline-block;
+	padding: 2px;
+	
+}
+
+.deck-flashcard-remove-confirm-yes:hover{
+	color: #0a0;
+}
+
+.deck-flashcard-remove-confirm-no:hover{
+	color: #a00;
+}
+
 .deck-flashcard-stats{
 	margin: 20px 5px;
 	vertical-align: top;

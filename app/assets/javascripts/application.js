@@ -209,7 +209,7 @@ function buildFlashcard(flashcard){
 		$(root).hover(function(){
 			$(this).addClass('card-hovered');		
 			var tools = $('<div class="deck-flashcard-tools"></div>');
-			var edit = $('<a href="#" class="deck-flashcard-edit"></a>').html('<span class="icon edit-icon"></span><span class="edit-hint">edit</span>').appendTo(tools);
+			var edit = $('<a href="#" class="deck-flashcard-edit"></a>').html('<span class="edit-hint">edit</span>').appendTo(tools);
 			var remove = $('<a href="#" class="deck-flashcard-remove"></a>').text('remove').appendTo(tools);
 			$(edit).click(function(e){
 				e.preventDefault();
@@ -217,15 +217,28 @@ function buildFlashcard(flashcard){
 			})
 			$(remove).click(function(e){
 				e.preventDefault();
-				$.ajax({
-					url: '/api/flashcard/remove.json?id='+flashcard.id,
-					success: function(){
-						$(root).fadeOut().remove();
-						if ($('.flashcard').length <3){
-							$('#start-learning-button').fadeOut();
+				$(this).hide();
+				var confirm = $('<span class="deck-flashcard-remove-confirm"></span>').html('Are you sure?').insertAfter(this);
+				var yes = $('<a href="#" class="deck-flashcard-remove-confirm-yes"></a>').html('Yes').appendTo(confirm);
+				var no = $('<a href="#" class="deck-flashcard-remove-confirm-no"></a>').html('no').appendTo(confirm);
+				$(yes).click(function(e){
+					e.preventDefault();
+					$.ajax({
+						url: '/api/flashcard/remove.json?id='+flashcard.id,
+						success: function(){
+							$(root).fadeOut().remove();
+							if ($('.flashcard').length <3){
+								$('#start-learning-button').fadeOut();
+							}
+
 						}
-						
-					}
+					})
+					
+				})
+				$(no).click(function(e){
+					e.preventDefault();
+					$(confirm).hide();
+					$(remove).fadeIn()
 				})
 			})
 			$("body").delegate("[data-confirm]", "click", confirmClickHandler);
