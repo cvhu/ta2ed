@@ -107,7 +107,7 @@ body {
 /*== Toolbar ==*/
 
 #toolbar{
-	margin: 45px 0 0 15px;
+	margin: 45px auto;
 	padding: 10px;
 	text-align: center;
 }
@@ -164,8 +164,9 @@ body {
 }
 
 #content{
-	margin: 20px 10px;
-	padding: 10px;	
+	width: 800px;
+	margin: 20px 0px;
+	padding: 0px;	
 	position: relative;
 }
 
@@ -325,7 +326,8 @@ a{
 }
 
 .deck-flashcard{
-	margin:10px;
+	position: relative;
+	margin: 30px auto;
 	padding: 10px;
 	display: inline-block;
 	width: 500px;
@@ -359,13 +361,51 @@ a{
 .deck-flashcard-stats{
 	margin: 20px 5px;
 	vertical-align: top;
-	display: inline-block;
+/*	position: absolute;*/
+	position: relative;
 }
 
-#deck-profile{
-	position: relative;
-	margin: 20px 10px;
-	padding: 10px;
+.deck-flashcard-score{
+	position: absolute;
+	border: 1px solid #aaa;
+	width: 50px;
+/*	height: 50px;*/
+	text-align: center;
+	vertical-align: bottom;
+	font-size: 150%;
+	padding: 15px 5px;
+	margin: 10px;
+	right: -100px;
+	top: -80px;
+	border-radius: 10px;
+/*	background: #7a1;*/
+	text-shadow: 1px 1px 2px #aaa;
+	color: #fff;
+}
+
+
+#deck-profile-left{
+	display: inline-block;
+	vertical-align: top;
+	width: 200px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#deck-profile-central{
+	display: inline-block;
+	vertical-align: top;
+	width: 390px;
+	margin: 0px;
+	padding: 0px;	
+}
+
+#deck-profile-right{
+	display: inline-block;
+	vertical-align: top;
+	width: 200px;
+	margin: 0px;
+	padding: 0px;	
 }
 
 #deck-toolbar{
@@ -444,7 +484,8 @@ a{
 
 #deck-flashcard-new{
 	padding: 0px;
-	margin: 20px;
+	margin: 20px auto;
+	width: 400px;
 }
 
 #deck-flashcard-submit{
@@ -459,6 +500,45 @@ a{
 #deck-edit a{
 	display: inline-block;
 	margin: 5px;
+}
+
+/*= Deck Masters =*/
+#deck-masters{
+	position: relative;
+	top: 10px;
+	left: 10px;
+}
+
+.deck-master{
+	margin: 20px 0px;
+	font-size: 130%;
+}
+
+.deck-master>*{
+	display: inline-block;
+	vertical-align: top;
+	margin: 2px 3px;
+}
+
+.deck-master-score{
+	color: #555;
+	font-size: 110%;
+}
+
+.deck-master-name a{
+	color: #77a;	
+	font-weight: bold;
+}
+
+.deck-master-name a:hover{
+	color: #77f;	
+	font-weight: bold;
+}
+
+
+.deck-master-date{
+	font-size: 70%;
+	color: #777;
 }
 
 /* Flashcard*/
@@ -499,8 +579,9 @@ a{
 }
 
 .flashcard-b{
-	font-size: 110%;
-	margin: 10px;
+	font-size: 130%;
+	line-height: 25px;
+	margin: 15px 5px;
 }
 
 
@@ -631,8 +712,8 @@ input[type=submit]:hover{
 
 /* ------------ Deck: flashcards*/
 .flashcard-div{
-	padding: 10px;
-	margin: 10px;
+	padding: 20px 0px;
+	margin: 0px;
 	position: relative;
 }
 

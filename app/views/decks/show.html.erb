@@ -31,14 +31,36 @@
 		<%= link_to 'Start Learning', prepare_learn_deck_path(@deck), :id => 'start-learning-button'%>
 	<% end %>
 <% end %>
+<% if current_user==@deck.user%>
+	<div id="deck-flashcard-new"> 
+	</div>
+<% end %>
 
-<div id="deck-profile">
-	<% if current_user==@deck.user%>
-		<div id="deck-flashcard-new"> 
-		</div>
-	<% end %>
+
+<div id="deck-profile-left">
+	<div id="deck-masters">
+		<% @masters.each do |master|%>
+			<div class="deck-master">
+				<div class="deck-master-score">
+					<%= "#{(master[:score]*100).round(2)}%" %>
+				</div>				
+				<div class="deck-master-date">
+					<%= time_ago_in_words(master[:last_session]) %>
+				</div>
+				<br>
+				<div class="deck-master-name">
+					<%= link_to master[:user][:name], user_path(User.find(master[:user][:id]))%>
+				</div>
+			</div>
+		<% end %>		
+	</div>	
+</div>
+<div id="deck-profile-central">	
 
 	<div id="deck-flashcards">
 		<div id="deck-id" style="display:none;"><%= @deck.id%></div>
 	</div>
+</div>
+<div id="deck-profile-right">
+	
 </div>

@@ -102,4 +102,19 @@ class Deck < ActiveRecord::Base
     end    
     return @quiz
   end
+  
+  # User profiles
+  
+  def masters
+    m = []
+    self.states.group_by(&:user_id).each do |user_id, u_states|
+      scores = []
+      self.flashcards.each do |flashcard|
+        scores << flashcard.score(user_id)
+      end
+      user = User.find(user_id)
+      m << {:user => {:id => user.id, :name => user.name}, :score =>scores.sum.to_f/scores.count, :last_session => u_states.last.created_at}
+    end
+    return m
+  end
 end

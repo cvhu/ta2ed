@@ -198,6 +198,11 @@ var confirmClickHandler = function (event) {
                 });
     };
 
+jQuery.fn.paintScore = function(score){
+	$(this).css('background', 'hsl('+(Math.log(1.0-score)*360)+', 70%, 50%)');
+	return this;
+}
+
 
 function buildFlashcard(flashcard){	
 	var root = $('<div class="flashcard-div"></div>');
@@ -205,6 +210,7 @@ function buildFlashcard(flashcard){
 	var sidea = $('<div class="flashcard-a"></div>').text(flashcard.side_a).appendTo(card);
 	var sideb = $('<div class="flashcard-b"></div>').text(flashcard.side_b).appendTo(card);
 	var stats = $('<div class="deck-flashcard-stats"></div>').appendTo(root);
+	var score = $('<div class="deck-flashcard-score"></div>').html(flashcard.score.toFixed(2)*100+'%').appendTo(stats).paintScore(flashcard.score);
 	if ($('#deck-flashcard-new').length>0){
 		$(root).hover(function(){
 			$(this).addClass('card-hovered');		

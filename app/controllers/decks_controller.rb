@@ -18,7 +18,7 @@ class DecksController < ApplicationController
   # GET /decks/1.json
   def show
     @deck = Deck.find(params[:id])
-    @flashcards = @deck.flashcards
+    @masters = @deck.masters
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @deck }
@@ -293,7 +293,7 @@ class DecksController < ApplicationController
   def apis(flashcards)
     apis = []
     flashcards.each do |flashcard|
-      apis << flashcard.api
+      apis << flashcard.api(current_user.id)
     end
     return apis
   end
