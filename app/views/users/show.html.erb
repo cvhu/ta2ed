@@ -1,8 +1,20 @@
-<div id="user_name">
-	name:
-	<%= @user.name%>
-</div>
-<div id="user_email">
-	email:
-	<%= @user.email%>
+<div id="user-profile">
+	<div id="user-profile-name">
+		<%= @user.name%>
+	</div>
+	<div id="user-profile-learnings">
+		<% @learnings.each do |learning| %>
+			<div class="user-profile-learning">
+				<div class='user-profile-learning-title'>
+					<%= link_to learning[:deck][:title], deck_path(learning[:deck][:id])%>
+				</div>
+				<div class="user-profile-learning-score">
+					<%= "#{(learning[:score]*100).round(2)}%"%>
+				</div>
+				<div class="user-profile-learning-date">
+					<%= time_ago_in_words(learning[:last_session])%>
+				</div>
+			</div>
+		<% end %>
+	</div>
 </div>

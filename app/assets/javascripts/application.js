@@ -199,7 +199,7 @@ var confirmClickHandler = function (event) {
     };
 
 jQuery.fn.paintScore = function(score){
-	$(this).css('background', 'hsl('+(Math.log(1.0-score)*360)+', 70%, 50%)');
+	$(this).css('background', 'hsl('+(360.0-score*240.0 )+', 70%, 50%)');
 	return this;
 }
 

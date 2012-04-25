@@ -18,14 +18,14 @@ class Flashcard < ActiveRecord::Base
     if states.empty?()
       score = 0.0
     else
-      values = {}
+      values = {3 => 0, 4 => 0}
       states.each do |state|
         if values.keys().include?(state.value)
           values[state.value] += 1
         else
           values[state.value] = 1
         end
-      end
+      end      
       score = (values[3]+0.0)/(values[3]+values[4])
     end    
     return score

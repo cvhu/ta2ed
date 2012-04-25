@@ -21,7 +21,7 @@
 		</ul>
 		<ul id="user-bar">
 			<% if current_user %>
-				<li><%= link_to current_user.name, edit_user_path(current_user), :id=> 'user-profile', :user_id => current_user.id%></li>
+				<li><%= link_to current_user.name, user_path(current_user), :id=> 'user-profile', :user_id => current_user.id%></li>
 				<li><%= link_to "Log Out", logout_path%></li>
 			<% end %>
 		</ul>		

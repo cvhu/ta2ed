@@ -1406,3 +1406,65 @@ input[type=submit]:hover{
 	-moz-transition-duration: 0.5s;	
 	-webkit-transition-duration: 0.5s;	
 }
+
+
+/*= User Profile =*/
+#user-profile{
+	
+}
+
+#user-profile-name{
+	font-size: 200%;
+	text-shadow: 1px 1px 2px #aaa;
+	padding: 10px 0px;
+}
+
+#user-profile-learnings{
+	margin: 15px 0px;
+}
+
+.user-profile-learning{
+	display: inline-block;
+	vertical-align: top;
+/*	width: 300px;*/
+	border: 1px solid #999;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #aaa;
+	background: #fff;
+	margin: 10px;
+	padding: 15px;
+}
+
+.user-profile-learning-title a{
+	font-size: 150%;
+	color: #777;
+	text-shadow: 1px 1px 2px #aaa;
+	transition-property: color;
+	-o-transition-property: color;
+	-moz-transition-property: color;
+	-webkit-transition-property: color;
+	transition-duration: 0.5s;	
+	-o-transition-duration: 0.5s;	
+	-moz-transition-duration: 0.5s;	
+	-webkit-transition-duration: 0.5s;	
+	
+}
+
+.user-profile-learning-title a:hover{
+	transition-property: color;
+	-o-transition-property: color;
+	-moz-transition-property: color;
+	-webkit-transition-property: color;
+	transition-duration: 0.5s;	
+	-o-transition-duration: 0.5s;	
+	-moz-transition-duration: 0.5s;	
+	-webkit-transition-duration: 0.5s;	
+	
+	text-shadow: 1px 1px 3px #777;
+	color: #000;
+}
+
+.user-profile-learning-score{
+	font-size: 150%;
+	padding: 10px 0px;
+}
