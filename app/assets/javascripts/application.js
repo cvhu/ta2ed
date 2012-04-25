@@ -82,7 +82,7 @@ jQuery.fn.loadFlashcardsForm = function(deck_id){
 		if (sidea_flag+sideb_flag > 0){
 			pushHeaderMessage('Card already exists', 'warning');			
 		}else{
-			dismissHeaderMessage();
+			dismissHeaderMessage(); //remove the header message if the duplication test has passed
 			var json = {
 				deck_id: deck_id,
 				side_a: $(sidea_field).val(),
