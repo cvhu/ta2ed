@@ -4,9 +4,6 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
 */
 
-/* Comment to test the push to github */
-/*this is a change*/
-
 body {
   background-color: #fff;
   color: #333;
@@ -67,28 +64,11 @@ body {
 	color: #ccc;
 	font-size: 125%;
 	text-shadow: 1px 1px 13px #aaa;
-	transition-property: color;
-	-o-transition-property: color;
-	-moz-transition-property: color;
-	-webkit-transition-property: color;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
 }
 
 #navigation a:hover{
 	color: #fff;
 	text-shadow: 1px 1px 13px #fff;
-	transition-property: color;
-	-o-transition-property: color;
-	-moz-transition-property: color;
-	-webkit-transition-property: color;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
-	
 }
 
 
@@ -115,36 +95,15 @@ body {
 #toolbar a {
 	text-align: center;
 	display: inline-block;
-	border: 1px solid #ccc;
 	padding: 10px 15px;
-	border-radius: 5px;	
-	background: green;
-	box-shadow: 1px 1px 3px #aaa;
+	background: rgba(175, 205, 0, 0.9);
 	color: #fff;
 	font-size: 1.2em;
 	margin: 5px;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
 }
 
 #toolbar a:hover{
-	background: #0d5;
-	border: 1px solid #aaa;
-	box-shadow: 1px 1px 2px #fff;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;	
+	background: rgba(175, 205, 0, 1);
 }
 
 
@@ -227,27 +186,28 @@ a{
 				11px -11px 1px #fff,
 				13px -13px 3px #777;
 	
-	transition-property: box-shadow;
 	-o-transition-property: box-shadow;
 	-moz-transition-property: box-shadow;
 	-webkit-transition-property: box-shadow;
-	transition-duration: 0.5s;
+	transition-property: box-shadow;
 	-o-transition-duration: 0.5s;
 	-moz-transition-duration: 0.5s;
 	-webkit-transition-duration: 0.5s;
+	transition-duration: 0.5s;
 	
 }
 
 .deck:hover{
 	box-shadow: 1px 1px 15px #777;
-	transition-property: box-shadow;
+	
 	-o-transition-property: box-shadow;
 	-moz-transition-property: box-shadow;
 	-webkit-transition-property: box-shadow;
-	transition-duration: 0.5s;
+	transition-property: box-shadow;
 	-o-transition-duration: 0.5s;
 	-moz-transition-duration: 0.5s;
 	-webkit-transition-duration: 0.5s;
+	transition-duration: 0.5s;
 	
 }
 
@@ -550,6 +510,7 @@ a{
 	padding: 20px;
 	border-radius: 5px;
 	background: #eee;
+	position: relative;
 }
 
 #flashcard-a{
@@ -567,8 +528,13 @@ a{
 	margin: 0px auto;
 	border: 1px solid #aaa;
 	padding: 20px;
+	
+}
+
+.flashcard,
+#flashcard,
+#quiz-view {
 	border-radius: 5px;
-	position: relative;
 	background-image: url('textures/light_wool.png');
 	box-shadow: 0px 0px 15px #aaa;
 }
@@ -630,34 +596,14 @@ input[type=submit]{
 	display: inline-block;
 	border: 1px solid #ccc;
 	padding: 10px 15px;
-	border-radius: 5px;	
 	background: #aaa;
-	box-shadow: 1px 1px 3px #aaa;
 	color: #fff;
 	font-size: 1.2em;
 	margin: 5px;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
 }
 
 input[type=submit]:hover{
-	background: #0d5;
-	border: 1px solid #aaa;
-	box-shadow: 1px 1px 2px #fff;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
+	background: rgba(175, 205, 0, 1);
 }
 
 #form-flashcard-submit {
@@ -684,23 +630,33 @@ input[type=submit]:hover{
 	margin: 10px 0px;
 	padding: 10px;
 	border-radius: 5px;
+	color: #222;
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 .choice:hover{
-	background: #aaa;
+	color: #eee;
+	background-color: rgba(0, 0, 0, 0.7);
 }
 
 .correct{
-	background: #0f0;
+	background-color: rgb(175, 205, 0);
 }
 
 .wrong{
-	background: #f00;
+	background-color: #dd6600;
 	color: white;
 }
 
 .partial-remind{
 	font-size: 90%;
+	color: #222;
+	background-color: rgba(221, 102, 0, 0.1);
+	padding: 0.5em 1em;
+	border-radius: 5px;
+	position: absolute;
+		right: 1em;
+		bottom: 1em;
 }
 
 #quiz-view{
@@ -975,40 +931,21 @@ input[type=submit]:hover{
 
 #learn-begin-button{
 	text-align: center;
+	color: #eee;
+	font-size: 1.3em;
+	
 	display: block;
-/*	position: absolute;
-	right: 10px;
-	bottom: 10px;
-*/	padding: 5px 10px;
-	margin: 15px 0px;
-	box-shadow: 1px 1px 5px #333;
-	background: #777;
-	border-radius: 5px;
-	color: #fff;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;	
+	padding: 10px 10px;
+	margin: 20px 0px;
+	
+	width: 40%;
+	margin-left: 30%;
+
+	background-color: #888;
 }
 
 #learn-begin-button:hover{
-	background: #073;
-/*	background-image: url('textures/pool_table.png');*/
-	text-shadow: 1px 1px 1px #aaa;
-	box-shadow: 1px 1px -3px #fff;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
-	
+	background-color: rgba(175, 205, 0, 1);
 }
 
 .edit-object{
@@ -1061,17 +998,33 @@ input[type=submit]:hover{
 #quiz-progress{
 	width: 500px;
 	height: 25px;
-	background: #fff;
+	background: #eee;
 	margin: 0px auto;
 	padding: 2px;
+	
+	border-radius: 4px;
+	
+	box-shadow: rgba(51, 51, 51, 0.6) 0px 0px 20px 0px;
+	
 }
 
 .quiz-progress-item{
 	display: inline-block;
 	background: #333;
-	height: 19px;
+	height: 21px;
 	margin: 1px;
-	border: 2px solid #ddd;
+	margin-left: 2px;
+	margin-right: 2px;
+	border: 1px solid #ddd;
+}
+
+.quiz-progress-item:nth-of-type(1) {
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+.quiz-progress-item:last-child {
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
 }
 
 .quiz-progress-item>*{
@@ -1080,7 +1033,8 @@ input[type=submit]:hover{
 }
 
 .current{
-	border: 2px solid #000;
+	border: 1px solid #333;
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
 }
 
 .none{
@@ -1092,19 +1046,19 @@ input[type=submit]:hover{
 }
 
 .partial{
-	background: #0ad;
+	background: rgb(155, 224, 252);
 }
 
 .partial-forgot{
-	background: #0df;
+	background: rgb(115, 184, 232);
 }
 
 .quiz{
-	background: #dd0;
+	background: rgb(255, 246, 0);
 }
 
 .quiz-right{
-	background: #0d6;
+	background: rgb(175, 205, 0);
 }
 
 .quiz-wrong{
@@ -1322,21 +1276,11 @@ input[type=submit]:hover{
 	color: #fff;
 	background: #0ad;
 	padding: 3px 10px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 5px #aaa;
 }
 
 
 #log-in-button:hover{
 	background: #07a;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
 }
 
 #log-in-submit{
@@ -1347,20 +1291,10 @@ input[type=submit]:hover{
 	color: #fff;
 	background: #0ad;
 	padding: 5px 10px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 5px #aaa;
 }
 
 #log-in-submit:hover{
 	background: #07a;
-	transition-property: background;
-	-o-transition-property: background;
-	-moz-transition-property: background;
-	-webkit-transition-property: background;
-	transition-duration: 0.5s;
-	-o-transition-duration: 0.5s;
-	-moz-transition-duration: 0.5s;
-	-webkit-transition-duration: 0.5s;
 }
 
 #log-in-hint{
@@ -1389,23 +1323,28 @@ input[type=submit]:hover{
 }
 
 .deck-actions a{
+	font-size: 1.2em;
 	display: inline-block;
-	margin: 2px 5px;
-	color: #777;
+	padding: 5px 10px;
+	color: #555;
 }
 
+	.deck-actions a:nth-of-type(1) {
+		background-color: rgba(240, 170, 0, 0.5);
+	}
+	.deck-actions a:nth-of-type(2) {
+		background-color: rgba(175, 205, 0, 0.5);
+	}
+
 .deck-actions a:hover{
-	text-shadow: 1px 1px 1px #aaa;
-	color: #000;
-	transition-property: color;
-	-o-transition-property: color;
-	-moz-transition-property: color;
-	-webkit-transition-property: color;
-	transition-duration: 0.5s;	
-	-o-transition-duration: 0.5s;	
-	-moz-transition-duration: 0.5s;	
-	-webkit-transition-duration: 0.5s;	
+	color: #000;	
 }
+	.deck-actions a:nth-of-type(1):hover {
+		background-color: rgba(240, 170, 0, 1);
+	}
+	.deck-actions a:nth-of-type(2):hover {
+		background-color: rgba(175, 205, 0, 1);
+	}
 
 
 /*= User Profile =*/
@@ -1468,3 +1407,44 @@ input[type=submit]:hover{
 	font-size: 150%;
 	padding: 10px 0px;
 }
+
+/* STYLES COMMON TO ALL BUTTONS */
+
+#toolbar a,
+#learn-begin-button,
+#log-in-button,
+#log-in-submit,
+input[type=submit],
+.deck-actions a,
+#next-button {
+	box-shadow: 1px 1px 3px #aaa;
+	border: 1px solid #ccc;
+	border-radius: 5px;	
+	
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3),
+				-1px -1px 1px rgba(0, 0, 0, 0.2);
+				
+	/* W3C Standard notation after the browser-specific notations , so browsers start using this one instead of the browser-specific ones when they learn it. */
+	-o-transition-property: background, background-color;
+	-moz-transition-property: background, background-color;
+	-webkit-transition-property: background, background-color;
+	transition-property: background, background-color; 
+	-o-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	transition-duration: 0.5s;
+}
+
+
+#toolbar a:hover,
+#learn-begin-button:hover,
+#log-in-button:hover,
+#log-in-submit:hover,
+input[type=submit]:hover,
+.deck-actions a:hover,
+#next-button:hover {
+	border: 1px solid #aaa;
+	box-shadow: 1px 1px 2px #fff;
+}
+
+
