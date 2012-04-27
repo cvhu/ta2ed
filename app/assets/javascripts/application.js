@@ -385,9 +385,9 @@ jQuery.fn.loadQuizView = function(quiz){
 	var choices = $('<div id="choices"></div>').appendTo(qv);
 	$.each(quiz.choices, function(i, choice){
 		if (choice == quiz.answer){
-			var choice_button = $('<a class="choice answer"></a>').attr('href', quiz.correct_url).text(choice).appendTo(choices);
+			var choice_button = $('<a class="choice unclicked answer"></a>').attr('href', quiz.correct_url).text(choice).appendTo(choices);
 		}else{
-			var choice_button = $('<a class="choice"></a>').attr('href', quiz.wrong_url).text(choice).appendTo(choices);
+			var choice_button = $('<a class="choice unclicked"></a>').attr('href', quiz.wrong_url).text(choice).appendTo(choices);
 		}
 	})		
 	var next_button = buildLearnButton();
@@ -395,6 +395,7 @@ jQuery.fn.loadQuizView = function(quiz){
 	progress.updateItem(quiz.question_id, quiz.question, 'quiz');
 	$(".choice").click(function(e){
 		e.preventDefault();
+		$(".choice").removeClass('unclicked');
 		$('#header-messages').children().slideUp();
 		$.ajax({
 			url: $(this).attr('href'),
@@ -407,13 +408,16 @@ jQuery.fn.loadQuizView = function(quiz){
 			if ($(this).hasClass('answer')){
 				$(this).addClass('correct');
 				progress.updateItem(quiz.question_id, quiz.question, 'quiz-right');
-				var feedback = $('<div class="feedback-correct"></div>').text('correct!').appendTo($("#choices"));
+				// var feedback = $('<div class="feedback-correct"></div>').text('correct!').appendTo($("#choices"));
+				var feedback = $('<span class="icon correct-icon quizview-feedback"></span>').appendTo(this);
 				$('#quiz-info-explored').append($('<li></li>').html(quiz.question_id));
 			}else{
 				progress.updateItem(quiz.question_id, quiz.question, 'quiz-wrong');
 				$(this).addClass('wrong');
 				$(".answer").addClass('correct');
-				var feedback = $('<div class="feedback-wrong"></div>').text('Did you forget this one?').appendTo($("#choices"));
+				// var feedback = $('<div class="feedback-wrong"></div>').text('Did you forget this one?').appendTo($("#choices"));
+				var feedback = $('<span class="icon wrong-icon quizview-feedback"></span>').appendTo(this);
+				var feedback = $('<span class="icon correct-icon quizview-feedback"></span>').appendTo($('.answer'));
 				$('#quiz-info-front').append($('<li></li>').html(quiz.question_id));
 			}		
 		}
@@ -422,6 +426,7 @@ jQuery.fn.loadQuizView = function(quiz){
 }
 
 jQuery.fn.loadPartialView = function(flashcards){
+	pushHeaderMessage('Here is a brief review of what you just learned!', 'hint');
 	var root = this;
 	var pv = $('<div id="partial-view" class="learn-view"></div>').appendTo(root);
 	$.each(flashcards, function(i, flashcard){

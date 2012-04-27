@@ -334,11 +334,11 @@ a{
 .deck-flashcard-score{
 	position: absolute;
 	border: 1px solid #aaa;
-	width: 50px;
+	width: 55px;
 /*	height: 50px;*/
 	text-align: center;
 	vertical-align: bottom;
-	font-size: 150%;
+	font-size: 130%;
 	padding: 15px 5px;
 	margin: 10px;
 	right: -100px;
@@ -534,7 +534,7 @@ a{
 	margin: 0px auto;
 	border: 1px solid #aaa;
 	padding: 20px;
-	
+	position: relative;
 }
 
 .flashcard,
@@ -565,8 +565,8 @@ a{
 	border-radius: 5px;
 	display: block;
 	position: absolute;
-	right: 30px;
-	bottom: 30px;
+	right: 10px;
+	bottom: 10px;
 }
 
 #prev-button{
@@ -640,7 +640,14 @@ input[type=submit]:hover{
 	background-color: rgba(0, 0, 0, 0.1);
 }
 
-.choice:hover{
+.quizview-feedback{
+	float: right;
+	font-size: 200%;
+	color: #fff;
+	font-weight: bold;
+}
+
+.unclicked:hover{
 	color: #eee;
 	background-color: rgba(0, 0, 0, 0.7);
 }
@@ -887,6 +894,16 @@ input[type=submit]:hover{
 .close-icon:before{
 	content: '[';
 }
+
+
+.correct-icon:before{
+	content: 'W';
+}
+
+.wrong-icon:before{
+	content: 'X';
+}
+
 
 @font-face {
     font-family: 'EntypoRegular';

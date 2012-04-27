@@ -45,7 +45,7 @@
 					<%= "#{(master[:score]*100).round(2)}%" %>
 				</div>				
 				<div class="deck-master-date">
-					<%= time_ago_in_words(master[:last_session]) %>
+					<%= "#{time_ago_in_words(master[:last_session])} ago" %>
 				</div>
 				<br>
 				<div class="deck-master-name">
