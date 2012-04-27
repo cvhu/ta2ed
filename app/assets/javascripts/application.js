@@ -371,10 +371,10 @@ jQuery.fn.loadQuizSummary = function(){
 		var wrong_width = $(score).width()*(1-rate);
 		$('<div class="quiz-summary-item-score-right quiz-right"></div>').css('width',right_width).appendTo(score);
 		$('<div class="quiz-summary-item-score-wrong quiz-wrong"></div>').css('width',wrong_width).appendTo(score);
-		$('<div class="quiz-summary-item-rate"></div>').html((rate*100).toFixed(2)+'%').appendTo(item);
-		
+		$('<div class="quiz-summary-item-rate"></div>').html((rate*100).toFixed(2)+'%').appendTo(item);		
 	})
-	
+	var deck_id = $('#deck-id').text();
+	var back_to_deck_button = $('<a id="next-button"></a>').html('Back to Deck').attr('href', '/decks/'+deck_id).appendTo(summary);	
 }
 
 jQuery.fn.loadQuizView = function(quiz){

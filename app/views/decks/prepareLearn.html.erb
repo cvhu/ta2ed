@@ -40,7 +40,7 @@
 			min: $('<div id="quiz-timer-min" class="quiz-timer-field"></div>').append($('<div id="quiz-timer-min-value"></div>').text('0')).append($('<div id="quiz-timer-min-subscript" class="quiz-timer-subscript"></div>').text('min')),
 			sec: $('<div id="quiz-timer-sec" class="quiz-timer-field"></div>').append($('<div id="quiz-timer-sec-value"></div>').text('0')).append($('<div id="quiz-timer-sec-subscript" class="quiz-timer-subscript"></div>').text('sec')),
 			build: function(){
-				var timer = $(this.div).prependTo($('#content')).append(this.min).append(this.sec);						
+				var timer = $(this.div).prependTo($('#toolbar')).append(this.min).append(this.sec);						
 			},
 			update: function(min){
 				$(this.min).find('#quiz-timer-min-value').text(min);
@@ -73,7 +73,7 @@
 		
 		var progress = {
 			build: function(count){
-				var progress = $('<div id="quiz-progress"></div>').prependTo($('#content'));
+				var progress = $('<div id="quiz-progress"></div>').prependTo($('#toolbar'));
 				var item_width = ($(progress).width() - 6*count)/count;
 				for(i=0; i<count;i++){
 					var item = $('<div class="quiz-progress-item quiz-progress-item-new"></div>').css('width', item_width).appendTo(progress);
@@ -104,7 +104,7 @@
 <% end %>
 
 <% content_for :header_title do%>
-	Learn <%= @deck.title%>
+	Learn <%= @deck.title%> <span style="display:none;" id="deck-id"><%= @deck.id%></span>
 <% end %>
 
 

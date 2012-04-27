@@ -87,8 +87,9 @@ body {
 /*== Toolbar ==*/
 
 #toolbar{
-	margin: 45px auto;
-	padding: 10px;
+	position: relative;
+	margin: 25px auto;
+	padding: 5px;
 	text-align: center;
 }
 
@@ -1170,7 +1171,7 @@ input[type=submit]:hover{
 }
 
 .timer-urgent{
-	color: #ff0;
+	color: #da0;
 	transition-property: color;
 	-o-transition-property: color;
 	-moz-transition-property: color;
@@ -1182,7 +1183,7 @@ input[type=submit]:hover{
 }
 
 .timer-complete{
-	color: #da0;
+	color: #d00;
 	transition-property: color;
 	-o-transition-property: color;
 	-moz-transition-property: color;
