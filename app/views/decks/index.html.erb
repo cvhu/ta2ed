@@ -38,7 +38,9 @@
 			<% end %>
 			<div class='deck-actions'>
 				<%= link_to 'view', deck_path(deck)%>
-				<%= link_to 'learn', prepare_learn_deck_path(deck)%>
+				<%if deck.flashcards.count > 3%>
+					<%= link_to 'learn', prepare_learn_deck_path(deck)%>
+				<%end%>
 			</div>
 		</div>
 	<% end %>

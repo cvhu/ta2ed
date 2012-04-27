@@ -90,7 +90,7 @@ class FlashcardsController < ApplicationController
     @flashcard.side_b = params[:side_b]
     respond_to do |format|
       if @flashcard.save
-        format.json { render json: @flashcard.api.to_json}
+        format.json { render json: @flashcard.api(current_user.id).to_json}
       else
         format.json { render json: @flashcard.errors, status: :unprocessable_entity }
       end
@@ -103,7 +103,7 @@ class FlashcardsController < ApplicationController
     @flashcard.side_b = params[:side_b]
     respond_to do |format|
       if @flashcard.save
-        format.json { render json: @flashcard.api.to_json}
+        format.json { render json: @flashcard.api(current_user.id).to_json}
       else
         format.json { render json: @flashcard.errors, status: :unprocessable_entity }
       end
