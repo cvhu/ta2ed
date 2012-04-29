@@ -298,6 +298,13 @@ jQuery.fn.loadLearnAPI = function(deck_id, mode, state){
 	$.each($('#quiz-info-explored li'), function(i, v){
 		explored.push($(v).text());
 	});
+	
+	var rate = (explored.length+0.0)/$('.quiz-progress-item').length;
+	if ($('#quiz-timer').length == 0){
+		progressSimple.updateItem(rate);
+	}
+	
+	
 	var data = {
 		deck_id: deck_id,
 		mode: mode,
@@ -309,7 +316,8 @@ jQuery.fn.loadLearnAPI = function(deck_id, mode, state){
 	}
 	
 	
-	if ((explored.length == $('.quiz-progress-item').length)||($('.timer-complete').length>0)){
+	if ((rate == 1.0)||($('.timer-complete').length>0)){
+		timer.end();
 		$(root).loadQuizSummary();
 	}else{
 		$.ajax({
@@ -408,14 +416,12 @@ jQuery.fn.loadQuizView = function(quiz){
 			if ($(this).hasClass('answer')){
 				$(this).addClass('correct');
 				progress.updateItem(quiz.question_id, quiz.question, 'quiz-right');
-				// var feedback = $('<div class="feedback-correct"></div>').text('correct!').appendTo($("#choices"));
 				var feedback = $('<span class="icon correct-icon quizview-feedback"></span>').appendTo(this);
 				$('#quiz-info-explored').append($('<li></li>').html(quiz.question_id));
 			}else{
 				progress.updateItem(quiz.question_id, quiz.question, 'quiz-wrong');
 				$(this).addClass('wrong');
 				$(".answer").addClass('correct');
-				// var feedback = $('<div class="feedback-wrong"></div>').text('Did you forget this one?').appendTo($("#choices"));
 				var feedback = $('<span class="icon wrong-icon quizview-feedback"></span>').appendTo(this);
 				var feedback = $('<span class="icon correct-icon quizview-feedback"></span>').appendTo($('.answer'));
 				$('#quiz-info-front').append($('<li></li>').html(quiz.question_id));

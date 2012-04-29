@@ -29,6 +29,7 @@
 			})
 			pushSlideMessage('Please Do Not Refresh the Page', 'warning');
 			progress.build(<%=@deck.flashcards.count%>);
+			progressSimple.build();
 			var front = $('<ul id="quiz-info-front"></ul>').appendTo(quiz_info);
 			var explored = $('<ul id="quiz-info-explored"></ul>').appendTo(quiz_info);
 			var partial_flag = $('<input type="text" id="quiz-info-partial-flag"/>').val('0').appendTo(quiz_info);
@@ -36,6 +37,8 @@
 		})
 		
 		var timer = {
+			total: 0,
+			tid: 0,
 			div: $('<div id="quiz-timer"></div>'),
 			min: $('<div id="quiz-timer-min" class="quiz-timer-field"></div>').append($('<div id="quiz-timer-min-value"></div>').text('0')).append($('<div id="quiz-timer-min-subscript" class="quiz-timer-subscript"></div>').text('min')),
 			sec: $('<div id="quiz-timer-sec" class="quiz-timer-field"></div>').append($('<div id="quiz-timer-sec-value"></div>').text('0')).append($('<div id="quiz-timer-sec-subscript" class="quiz-timer-subscript"></div>').text('sec')),
@@ -44,9 +47,10 @@
 			},
 			update: function(min){
 				$(this.min).find('#quiz-timer-min-value').text(min);
+				this.total = min*60;
 			},
 			begin: function(){
-				var tid = setInterval(secDown,1000);
+				this.tid = setInterval(secDown,1000);
 				var timer = this;
 				function secDown(){
 					var min_val = parseInt($('#quiz-timer-min-value').text());
@@ -65,15 +69,20 @@
 					if (min_val == 0){
 						$(timer.div).addClass('timer-urgent');
 					}
+					var rate = 1.0 - (min_val*60+sec_val+0.0)/(timer.total);
+					progressSimple.updateItem(rate);
 					$('#quiz-timer-min-value').text(min_val); 
 					$('#quiz-timer-sec-value').text(sec_val); 
 				}
+			},
+			end: function(){
+				clearInterval(this.tid);
 			}
 		}
 		
 		var progress = {
 			build: function(count){
-				var progress = $('<div id="quiz-progress"></div>').prependTo($('#toolbar'));
+				var progress = $('<div id="quiz-progress"></div>').prependTo($('#toolbar')).hide();
 				var item_width = ($(progress).width() - 6*count)/count;
 				for(i=0; i<count;i++){
 					var item = $('<div class="quiz-progress-item quiz-progress-item-new"></div>').css('width', item_width).appendTo(progress);
@@ -98,6 +107,38 @@
 				}
 				$(item).addClass('current').children().hide();
 				$('<div></div>').addClass(state).appendTo(item);				
+			}
+		}
+		
+		var progressSimple = {
+			progress: $('<div id="quiz-progress"></div>'),
+			bar: $('<div id="quiz-progress-bar"></div>'),
+			build: function(count){
+				$(this.progress).prependTo($('#toolbar'));
+				$(this.bar).appendTo(this.progress);
+				this.updateItem(0.0);
+			},
+			updateItem: function(rate){
+				if (rate > 0.8){
+					$(this.bar).css('background','#f00');
+				}else{
+					if (rate >0.6){
+						$(this.bar).css('background','#fa0');
+					}else{
+						if (rate > 0.4){
+							$(this.bar).css('background','#af0');
+						}else{
+							if (rate > 0.2){
+								$(this.bar).css('background','#0af');
+							}else{
+								$(this.bar).css('background','#05a');
+							}
+						}
+					}
+				}
+				$(this.bar).animate({
+					width: $(this.progress).width()*(1.0-rate)
+				}, 500);
 			}
 		}
 	</script>
